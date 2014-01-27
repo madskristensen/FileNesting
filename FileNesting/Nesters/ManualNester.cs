@@ -1,0 +1,75 @@
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using EnvDTE;
+
+namespace MadsKristensen.FileNesting
+{
+    class ManualNester
+    {
+        public static void Nest(IEnumerable<ProjectItem> items)
+        {
+            Dialog.ItemSelector selector = new Dialog.ItemSelector(items);
+            selector.ShowDialog();
+
+            if (string.IsNullOrEmpty(selector.SelectedFile))
+                return;
+
+            foreach (ProjectItem item in items)
+            {
+                string path = item.Properties.Item("FullPath").Value.ToString();
+                ProjectItem parent = item.DTE.Solution.FindProjectItem(selector.SelectedFile);
+
+                if (parent != null)
+                    parent.ProjectItems.AddFromFile(path);
+            }
+        }
+
+        public static void UnNest(ProjectItem item)
+        {
+            foreach (ProjectItem child in item.ProjectItems)
+            {
+                UnNest(child);
+            }
+
+            string path = item.Properties.Item("FullPath").Value.ToString();
+            string dir = Path.GetDirectoryName(path);
+            object parent = item.Collection.Parent;
+
+            while (parent != null)
+            {
+                var pi = parent as ProjectItem;
+
+                if (pi != null)
+                {
+                    if (!Path.HasExtension(pi.FileNames[0]))
+                    {
+                        object itemType = item.Properties.Item("ItemType").Value;
+
+                        string temp = Path.GetTempFileName();
+                        File.Copy(path, temp, true);
+                        item.Delete();
+                        File.Copy(temp, path);
+                        File.Delete(temp);
+
+                        ProjectItem newItem = pi.ContainingProject.ProjectItems.AddFromFile(path);
+                        newItem.Properties.Item("ItemType").Value = itemType;
+                        break;
+                    }
+
+                    parent = pi.Collection.Parent;
+                }
+                else
+                {
+                    var pj = parent as Project;
+                    if (pj != null)
+                    {
+                        item.Remove();
+                        pj.ProjectItems.AddFromFile(path);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
