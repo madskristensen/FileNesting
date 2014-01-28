@@ -111,7 +111,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dialog\ItemSelector.xaml.cs">
+    <Compile Include="Dialogs\ItemSelector.xaml.cs">
       <DependentUpon>ItemSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
@@ -123,11 +123,10 @@
     <Compile Include="Nesters\Automated\BundleNester.cs" />
     <Compile Include="Nesters\Automated\AddedExtensionNester.cs" />
     <Compile Include="Nesters\Automated\KnownFileTypeNester.cs" />
-    <Compile Include="Options\NestingOptions.cs">
+    <Compile Include="Dialogs\NestingOptions.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PackageConstants.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="FileNestingPackage.cs" />
     <Compile Include="Nesters\FileNestingFactory.cs" />
     <Compile Include="Nesters\IFileNester.cs" />
@@ -139,6 +138,7 @@
     <EmbeddedResource Include="VSPackage.resx">
       <MergeWithCTO>true</MergeWithCTO>
       <ManifestResourceName>VSPackage</ManifestResourceName>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -167,7 +167,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Dialog\ItemSelector.xaml">
+    <Page Include="Dialogs\ItemSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using Microsoft.VisualStudio;
 
-namespace MadsKristensen.FileNesting.Dialog
+namespace MadsKristensen.FileNesting
 {
     public partial class ItemSelector : Window
     {

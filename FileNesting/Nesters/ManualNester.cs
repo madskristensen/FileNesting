@@ -8,7 +8,7 @@ namespace MadsKristensen.FileNesting
     {
         public static void Nest(IEnumerable<ProjectItem> items)
         {
-            Dialog.ItemSelector selector = new Dialog.ItemSelector(items);
+            ItemSelector selector = new ItemSelector(items);
 
             if (!selector.ShowDialog().Value)
                 return;
