@@ -48,11 +48,7 @@ namespace MadsKristensen.FileNesting
                     {
                         object itemType = item.Properties.Item("ItemType").Value;
 
-                        string temp = Path.GetTempFileName();
-                        File.Copy(path, temp, true);
-                        item.Delete();
-                        File.Copy(temp, path);
-                        File.Delete(temp);
+                        DeleteAndAdd(item, path);
 
                         ProjectItem newItem = pi.ContainingProject.ProjectItems.AddFromFile(path);
                         newItem.Properties.Item("ItemType").Value = itemType;
@@ -66,12 +62,25 @@ namespace MadsKristensen.FileNesting
                     var pj = parent as Project;
                     if (pj != null)
                     {
-                        item.Remove();
-                        pj.ProjectItems.AddFromFile(path);
+                        object itemType = item.Properties.Item("ItemType").Value;
+
+                        DeleteAndAdd(item, path);
+
+                        ProjectItem newItem = pj.ProjectItems.AddFromFile(path);
+                        newItem.Properties.Item("ItemType").Value = itemType;
                         break;
                     }
                 }
             }
+        }
+
+        private static void DeleteAndAdd(ProjectItem item, string path)
+        {
+            string temp = Path.GetTempFileName();
+            File.Copy(path, temp, true);
+            item.Delete();
+            File.Copy(temp, path);
+            File.Delete(temp);
         }
     }
 }
