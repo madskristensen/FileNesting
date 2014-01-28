@@ -7,11 +7,11 @@ using Microsoft.VisualStudio.Shell;
 
 namespace MadsKristensen.FileNesting
 {
-    class RunAutoNestingButton
+    static class RunAutoNestingButton
     {
         private static DTE2 _dte;
 
-        public static void Register(DTE2 dte, OleMenuCommandService mcs)
+        public static void Register(DTE2 dte, MenuCommandService mcs)
         {
             _dte = dte;
             CommandID nestAllId = new CommandID(GuidList.guidFileNestingCmdSet, (int)PkgCmdIDList.cmdRunNesting);

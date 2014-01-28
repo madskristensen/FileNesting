@@ -7,7 +7,7 @@ using Microsoft.VisualStudio;
 
 namespace MadsKristensen.FileNesting
 {
-    class FileNestingFactory
+    static class FileNestingFactory
     {
         private static IEnumerable<Lazy<IFileNester>> _nesters;
         private static ProjectItemsEvents _events;

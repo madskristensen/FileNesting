@@ -5,11 +5,11 @@ using Microsoft.VisualStudio.Shell;
 
 namespace MadsKristensen.FileNesting
 {
-    class EnableAutoNestButton
+    static class EnableAutoNestButton
     {
         private static DTE2 _dte;
         
-        public static void Register(DTE2 dte, OleMenuCommandService mcs)
+        public static void Register(DTE2 dte, MenuCommandService mcs)
         {
             _dte = dte;
             CommandID autoId = new CommandID(GuidList.guidFileNestingCmdSet, (int)PkgCmdIDList.cmdAutoNesting);

@@ -36,8 +36,8 @@ namespace MadsKristensen.FileNesting
                 menuCommand.BeforeQueryStatus += ShowMenu;
                 mcs.AddCommand(menuCommand);
 
-                UnNestButton.Register(DTE, mcs);
-                NestButton.Register(DTE, mcs);
+                UnNestButton.Register(mcs);
+                NestButton.Register(mcs);
                 EnableAutoNestButton.Register(DTE, mcs);
                 RunAutoNestingButton.Register(DTE, mcs);
             }

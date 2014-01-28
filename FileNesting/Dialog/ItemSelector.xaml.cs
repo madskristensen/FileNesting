@@ -32,7 +32,7 @@ namespace MadsKristensen.FileNesting.Dialog
             return paths;
         }
 
-        private IEnumerable<EnvDTE.ProjectItem> GetSiblings(EnvDTE.ProjectItem item)
+        private static IEnumerable<EnvDTE.ProjectItem> GetSiblings(EnvDTE.ProjectItem item)
         {
             EnvDTE.ProjectItem folder = item.Collection.Parent as EnvDTE.ProjectItem;
             List<EnvDTE.ProjectItem> items = new List<EnvDTE.ProjectItem>();

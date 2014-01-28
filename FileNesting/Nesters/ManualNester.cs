@@ -4,7 +4,7 @@ using EnvDTE;
 
 namespace MadsKristensen.FileNesting
 {
-    class ManualNester
+    static class ManualNester
     {
         public static void Nest(IEnumerable<ProjectItem> items)
         {

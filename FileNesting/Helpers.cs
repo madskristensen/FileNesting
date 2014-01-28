@@ -51,20 +51,5 @@ namespace MadsKristensen.FileNesting
                 }
             }
         }
-
-        public static Project GetSelectedProject()
-        {
-            var items = (Array)FileNestingPackage.DTE.ToolWindows.SolutionExplorer.SelectedItems;
-            foreach (UIHierarchyItem selItem in items)
-            {
-                var item = selItem.Object as Project;
-                if (item != null)
-                {
-                    return item;
-                }
-            }
-
-            return null;
-        }
     }
 }

@@ -10,11 +10,11 @@ using Microsoft.VisualStudio.Shell;
 
 namespace MadsKristensen.FileNesting
 {
-    class UnNestButton
+    static class UnNestButton
     {
         private static IEnumerable<ProjectItem> _nested;
 
-        public static void Register(DTE2 dte, OleMenuCommandService mcs)
+        public static void Register(MenuCommandService mcs)
         {
             CommandID unNestId = new CommandID(GuidList.guidFileNestingCmdSet, (int)PkgCmdIDList.cmdUnNest);
             OleMenuCommand menuUnNest = new OleMenuCommand(UnNest, unNestId);

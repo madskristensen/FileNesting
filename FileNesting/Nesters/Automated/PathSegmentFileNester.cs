@@ -37,7 +37,7 @@ namespace MadsKristensen.FileNesting.Nesters
             return NestingResult.Continue;
         }
 
-        private bool IsSupported(string fileName)
+        private static bool IsSupported(string fileName)
         {
             string extension = Path.GetExtension(fileName).ToLowerInvariant();
             string[] allowed = new[] { ".js", ".css", ".html", ".htm", ".less", ".scss", ".coffee", ".iced", ".config" };
