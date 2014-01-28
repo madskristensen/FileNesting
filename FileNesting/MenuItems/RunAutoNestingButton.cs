@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Design;
-using System.IO;
 using System.Linq;
 using EnvDTE;
 using EnvDTE80;
@@ -11,8 +9,11 @@ namespace MadsKristensen.FileNesting
 {
     class RunAutoNestingButton
     {
+        private static DTE2 _dte;
+
         public static void Register(DTE2 dte, OleMenuCommandService mcs)
         {
+            _dte = dte;
             CommandID nestAllId = new CommandID(GuidList.guidFileNestingCmdSet, (int)PkgCmdIDList.cmdRunNesting);
             OleMenuCommand menuNestAll = new OleMenuCommand(NestAll, nestAllId);
             mcs.AddCommand(menuNestAll);
@@ -20,20 +21,15 @@ namespace MadsKristensen.FileNesting
 
         private static void NestAll(object sender, EventArgs e)
         {
-            var selected = Helpers.GetSelectedItems();
-            List<ProjectItem> items = new List<ProjectItem>(selected);
+            var selected = Helpers.GetSelectedItemsRecursive().Distinct();
+            _dte.StatusBar.Text = "Nesting files...";
 
-            foreach (ProjectItem item in selected.Where(i => Directory.Exists(i.FileNames[0])))
-                foreach (ProjectItem child in item.ProjectItems)
-                {
-                    if (File.Exists(child.FileNames[0]))
-                        items.Add(child);
-                }
-
-            foreach (ProjectItem item in items)
+            foreach (ProjectItem item in selected)
             {
                 FileNestingFactory.RunNesting(item);
             }
+
+            _dte.StatusBar.Clear();
         }
     }
 }

@@ -2,23 +2,27 @@
 using System.ComponentModel.Composition;
 using System.IO;
 using EnvDTE;
+using Microsoft.VisualStudio.Utilities;
 
 namespace MadsKristensen.FileNesting
 {
     [Export(typeof(IFileNester))]
-    internal class KnownFileTypeNester : IFileNester
+    [Name("Sprite Nester")]
+    [Order(Before = "Added Extension Nester")]
+    internal class SpriteNester : IFileNester
     {
         private static Dictionary<string, string[]> _mapping = new Dictionary<string, string[]>(){
-            {".js", new [] {".coffee", ".iced", ".ts"}},
-            {".css", new [] {".less", ".scss", ".sass"}},
+            {".png", new [] {".sprite"}},
+            {".jpg", new [] {".sprite"}},
+            {".gif", new [] {".sprite"}},
         };
 
-        public bool Nest(string fileName)
+        public NestingResult Nest(string fileName)
         {
             string extension = Path.GetExtension(fileName).ToLowerInvariant();
 
             if (!_mapping.ContainsKey(extension))
-                return false;
+                return NestingResult.Continue;
 
             foreach (string ext in _mapping[extension])
             {
@@ -27,11 +31,12 @@ namespace MadsKristensen.FileNesting
 
                 if (item != null)
                 {
-                    return item.ProjectItems.AddFromFile(fileName) != null;
+                    item.ProjectItems.AddFromFile(fileName);
+                    return NestingResult.StopProcessing;
                 }
             }
 
-            return true;
+            return NestingResult.Continue;
         }
     }
 }

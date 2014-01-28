@@ -13,13 +13,11 @@ namespace MadsKristensen.FileNesting
         private static ProjectItemsEvents _events;
         public static bool Enabled { get; set; }
 
-
         public static void Enable(DTE2 dte)
         {
             if (_nesters == null)
             {
-                _nesters = WebEditor.ExportProvider.GetExports<IFileNester>();
-
+                _nesters = ComponentLocatorWithOrdering<IFileNester>.ImportMany();
                 _events = ((Events2)dte.Events).ProjectItemsEvents;
                 _events.ItemAdded += ItemAdded;
                 _events.ItemRenamed += ItemRenamed;
@@ -36,7 +34,7 @@ namespace MadsKristensen.FileNesting
             }
         }
 
-        private static void ItemAdded(EnvDTE.ProjectItem projectItem)
+        private static void ItemAdded(ProjectItem projectItem)
         {
             if (projectItem.Properties != null)
             {
@@ -53,7 +51,10 @@ namespace MadsKristensen.FileNesting
 
             foreach (var nester in _nesters)
             {
-                nester.Value.Nest(fileName);
+                NestingResult result = nester.Value.Nest(fileName);
+
+                if (result == NestingResult.StopProcessing)
+                    break;
             }
         }
 

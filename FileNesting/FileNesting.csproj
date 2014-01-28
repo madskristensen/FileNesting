@@ -17,7 +17,8 @@
     <RootNamespace>MadsKristensen.FileNesting</RootNamespace>
     <AssemblyName>FileNesting</AssemblyName>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -41,7 +42,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.OLE.Interop" />
     <Reference Include="Microsoft.VisualStudio.Shell.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop" />
@@ -143,15 +144,17 @@
     <Compile Include="MenuItems\NestButton.cs" />
     <Compile Include="MenuItems\UnNestButton.cs" />
     <Compile Include="MenuItems\EnableAutoNestButton.cs" />
-    <Compile Include="Nesters\AddedExtensionNester.cs" />
-    <Compile Include="Nesters\KnownFileTypeNester.cs" />
+    <Compile Include="Nesters\Automated\SpriteNester.cs" />
+    <Compile Include="Nesters\Automated\BundleNester.cs" />
+    <Compile Include="Nesters\Automated\AddedExtensionNester.cs" />
+    <Compile Include="Nesters\Automated\KnownFileTypeNester.cs" />
     <Compile Include="PackageConstants.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="FileNestingPackage.cs" />
     <Compile Include="Nesters\FileNestingFactory.cs" />
     <Compile Include="Nesters\IFileNester.cs" />
     <Compile Include="Nesters\ManualNester.cs" />
-    <Compile Include="Nesters\PathSegmentFileNester.cs" />
+    <Compile Include="Nesters\Automated\PathSegmentFileNester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +167,6 @@
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Key.snk" />
   </ItemGroup>
   <ItemGroup>
     <VSCTCompile Include="FileNesting.vsct">

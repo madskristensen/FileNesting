@@ -2,16 +2,19 @@
 using System.IO;
 using System.Linq;
 using EnvDTE;
+using Microsoft.VisualStudio.Utilities;
 
 namespace MadsKristensen.FileNesting.Nesters
 {
     [Export(typeof(IFileNester))]
+    [Name("Path Segment Nester")]
+    [Order(Before = "Added Extension Nester")]
     internal class PathSegmentNester : IFileNester
     {
-        public bool Nest(string fileName)
+        public NestingResult Nest(string fileName)
         {
             if (!IsSupported(fileName))
-                return false;
+                return NestingResult.Continue;
 
             string name = Path.GetFileNameWithoutExtension(fileName);
             ProjectItem item = FileNestingPackage.DTE.Solution.FindProjectItem(fileName);
@@ -28,11 +31,11 @@ namespace MadsKristensen.FileNesting.Nesters
                 if (parent != null)
                 {
                     parent.ProjectItems.AddFromFile(fileName);
-                    return true;
+                    return NestingResult.StopProcessing;
                 }
             }
 
-            return false;
+            return NestingResult.Continue;
         }
 
         private bool IsSupported(string fileName)
