@@ -41,7 +41,7 @@ namespace MadsKristensen.FileNesting.Nesters
         private bool IsSupported(string fileName)
         {
             string extension = Path.GetExtension(fileName).ToLowerInvariant();
-            string[] allowed = new[] { ".js", ".css", ".html", ".htm", ".less", ".scss", ".coffee", ".iced" };
+            string[] allowed = new[] { ".js", ".css", ".html", ".htm", ".less", ".scss", ".coffee", ".iced", ".config" };
 
             return allowed.Contains(extension);
         }

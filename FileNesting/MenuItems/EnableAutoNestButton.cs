@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Design;
 using System.Linq;
+using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 
@@ -8,6 +9,8 @@ namespace MadsKristensen.FileNesting
 {
     class EnableAutoNestButton
     {
+        private static Project _project;
+
         public static void Register(DTE2 dte, OleMenuCommandService mcs)
         {
             CommandID autoId = new CommandID(GuidList.guidFileNestingCmdSet, (int)PkgCmdIDList.cmdAutoNesting);
@@ -19,23 +22,24 @@ namespace MadsKristensen.FileNesting
         private static void BeforeAutoNest(object sender, EventArgs e)
         {
             var button = (OleMenuCommand)sender;
-            var project = Helpers.GetSelectedProject();
+            _project = Helpers.GetSelectedProject();
 
-            if (project == null)
+            if (_project == null)
             {
-                project = Helpers.GetSelectedItems().First(i => i.ContainingProject != null).ContainingProject;
-                button.Text = "Enable automatic nesting for " + project.Name;
+                _project = Helpers.GetSelectedItems().First().ContainingProject;
+
+                if (_project != null)
+                    button.Text = "Enable automatic nesting for " + _project.Name;
             }
 
-            button.Checked = project != null && FileNestingFactory.IsAutoNestEnabled(project);
+            button.Checked = _project != null && FileNestingFactory.IsAutoNestEnabled(_project);
         }
 
         private static void AutoNest(object sender, EventArgs e)
         {
-            var project = Helpers.GetSelectedProject();
-            var isEnabled = FileNestingFactory.IsAutoNestEnabled(project);
+            var isEnabled = FileNestingFactory.IsAutoNestEnabled(_project);
 
-            FileNestingFactory.SetAutoNesting(project, !isEnabled);
+            FileNestingFactory.ToggleAutoNesting(_project, !isEnabled);
         }
     }
 }

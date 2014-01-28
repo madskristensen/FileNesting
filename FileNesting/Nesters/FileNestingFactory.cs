@@ -28,7 +28,7 @@ namespace MadsKristensen.FileNesting
 
         private static void ItemRenamed(ProjectItem item, string OldName)
         {
-            if (item.Properties != null && !(item.Collection.Parent is ProjectItem))
+            if (IsAutoNestEnabled(item.ContainingProject) && item.Properties != null && !(item.Collection.Parent is ProjectItem))
             {
                 RunNesting(item);
             }
@@ -36,7 +36,7 @@ namespace MadsKristensen.FileNesting
 
         private static void ItemAdded(ProjectItem item)
         {
-            if (item.Properties != null && !(item.Collection.Parent is ProjectItem))
+            if (IsAutoNestEnabled(item.ContainingProject) && item.Properties != null && !(item.Collection.Parent is ProjectItem))
             {
                 RunNesting(item);
             }
@@ -44,7 +44,7 @@ namespace MadsKristensen.FileNesting
 
         public static void RunNesting(ProjectItem item)
         {
-            if (!Enabled || !IsAutoNestEnabled(item.ContainingProject))
+            if (!Enabled)
                 return;
 
             string fileName = item.Properties.Item("FullPath").Value.ToString();
@@ -72,15 +72,20 @@ namespace MadsKristensen.FileNesting
             return false;
         }
 
-        public static void SetAutoNesting(Project project, bool enabled)
+        public static void ToggleAutoNesting(Project project, bool enabled)
         {
             string projectPath = project.FullName;
             Microsoft.Build.Evaluation.Project targetProject = Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.LoadedProjects.FirstOrDefault((p) => p.FullPath == projectPath);
 
-            if (targetProject != null)
-            {
-                targetProject.SetProperty("AutoNestFiles", enabled.ToString().ToLowerInvariant());
-            }
+            if (targetProject == null)
+                return;
+
+            targetProject.SetProperty("AutoNestFiles", enabled.ToString().ToLowerInvariant());
+
+            if (enabled)
+                project.DTE.StatusBar.Text = "Auto nesting enabled for " + project.Name;
+            else
+                project.DTE.StatusBar.Text = "Auto nesting disabled for " + project.Name;
         }
     }
 }
