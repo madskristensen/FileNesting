@@ -23,5 +23,11 @@ namespace MadsKristensen.FileNesting
 
             return NestingResult.Continue;
         }
+
+
+        public bool IsEnabled()
+        {
+            return FileNestingPackage.Options.EnableExtensionRule;
+        }
     }
 }

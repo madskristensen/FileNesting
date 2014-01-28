@@ -17,7 +17,6 @@ namespace MadsKristensen.FileNesting.Nesters
                 return NestingResult.Continue;
 
             string name = Path.GetFileNameWithoutExtension(fileName);
-            ProjectItem item = FileNestingPackage.DTE.Solution.FindProjectItem(fileName);
 
             int index = name.LastIndexOf('.');
             if (index > -1)
@@ -44,6 +43,11 @@ namespace MadsKristensen.FileNesting.Nesters
             string[] allowed = new[] { ".js", ".css", ".html", ".htm", ".less", ".scss", ".coffee", ".iced", ".config" };
 
             return allowed.Contains(extension);
+        }
+
+        public bool IsEnabled()
+        {
+            return FileNestingPackage.Options.EnablePathSegmentRule;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Windows.Threading;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
@@ -14,26 +15,19 @@ namespace MadsKristensen.FileNesting
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidFileNestingPkgString)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    [ProvideOptionPage(typeof(NestingOptions), "File Nesting", "General", 101, 100, true, new[] { "File Nesting in Solution Explorer" })]
     public sealed class FileNestingPackage : Package
     {
-        private static DTE2 _dte;
-        
-        internal static DTE2 DTE
-        {
-            get
-            {
-                if (_dte == null)
-                    _dte = ServiceProvider.GlobalProvider.GetService(typeof(DTE)) as DTE2;
-
-                return _dte;
-            }
-        }
+        public static DTE2 DTE { get; private set; }
+        public static NestingOptions Options { get; private set; }
 
         protected override void Initialize()
         {
             base.Initialize();
-            FileNestingFactory.Enable(DTE);
+            DTE = GetService(typeof(DTE)) as DTE2;
 
+            FileNestingFactory.Enable(DTE);
+            
             OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (null != mcs)
             {
@@ -42,11 +36,18 @@ namespace MadsKristensen.FileNesting
                 menuCommand.BeforeQueryStatus += ShowMenu;
                 mcs.AddCommand(menuCommand);
 
-                UnNestButton.Register(_dte, mcs);
-                NestButton.Register(_dte, mcs);
-                EnableAutoNestButton.Register(_dte, mcs);
-                RunAutoNestingButton.Register(_dte, mcs);                
+                UnNestButton.Register(DTE, mcs);
+                NestButton.Register(DTE, mcs);
+                EnableAutoNestButton.Register(DTE, mcs);
+                RunAutoNestingButton.Register(DTE, mcs);
             }
+
+            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+            {
+                Options = (NestingOptions)GetDialogPage(typeof(NestingOptions));
+                FileNestingFactory.Enabled = true;
+
+            }), DispatcherPriority.ApplicationIdle, null);
         }
 
         private void ShowMenu(object sender, EventArgs e)

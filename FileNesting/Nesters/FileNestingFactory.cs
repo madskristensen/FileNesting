@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EnvDTE;
 using EnvDTE80;
-using Microsoft.Web.Editor;
+using Microsoft.VisualStudio;
 
 namespace MadsKristensen.FileNesting
 {
@@ -15,30 +15,27 @@ namespace MadsKristensen.FileNesting
 
         public static void Enable(DTE2 dte)
         {
-            if (_nesters == null)
+            if (_events == null)
             {
-                _nesters = ComponentLocatorWithOrdering<IFileNester>.ImportMany();
                 _events = ((Events2)dte.Events).ProjectItemsEvents;
                 _events.ItemAdded += ItemAdded;
                 _events.ItemRenamed += ItemRenamed;
             }
-
-            Enabled = true;
         }
 
         private static void ItemRenamed(ProjectItem item, string OldName)
         {
-            if (IsAutoNestEnabled(item.ContainingProject) && item.Properties != null && !(item.Collection.Parent is ProjectItem))
-            {
-                RunNesting(item);
-            }
+            ItemAdded(item);
         }
 
         private static void ItemAdded(ProjectItem item)
         {
-            if (IsAutoNestEnabled(item.ContainingProject) && item.Properties != null && !(item.Collection.Parent is ProjectItem))
+            if (FileNestingPackage.Options.EnableAutoNesting && item.Properties != null)
             {
-                RunNesting(item);
+                ProjectItem parent = item.Collection.Parent as ProjectItem;
+
+                if (parent == null || parent.Kind != VSConstants.ItemTypeGuid.PhysicalFile_string)
+                    RunNesting(item);
             }
         }
 
@@ -47,45 +44,21 @@ namespace MadsKristensen.FileNesting
             if (!Enabled)
                 return;
 
-            string fileName = item.Properties.Item("FullPath").Value.ToString();
+            EnsureImports();
 
-            foreach (var nester in _nesters)
+            foreach (var nester in _nesters.Where(n => n.Value.IsEnabled()))
             {
-                NestingResult result = nester.Value.Nest(fileName);
+                NestingResult result = nester.Value.Nest(item.FileNames[0]);
 
                 if (result == NestingResult.StopProcessing)
                     break;
             }
         }
 
-        public static bool IsAutoNestEnabled(Project project)
+        private static void EnsureImports()
         {
-            string projectPath = project.FullName;
-            Microsoft.Build.Evaluation.Project targetProject = Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.LoadedProjects.FirstOrDefault((p) => p.FullPath == projectPath);
-
-            if (targetProject != null)
-            {
-                var property = targetProject.GetProperty("AutoNestFiles");
-                return property != null && property.EvaluatedValue.Equals("true", StringComparison.OrdinalIgnoreCase);
-            }
-
-            return false;
-        }
-
-        public static void ToggleAutoNesting(Project project, bool enabled)
-        {
-            string projectPath = project.FullName;
-            Microsoft.Build.Evaluation.Project targetProject = Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.LoadedProjects.FirstOrDefault((p) => p.FullPath == projectPath);
-
-            if (targetProject == null)
-                return;
-
-            targetProject.SetProperty("AutoNestFiles", enabled.ToString().ToLowerInvariant());
-
-            if (enabled)
-                project.DTE.StatusBar.Text = "Auto nesting enabled for " + project.Name;
-            else
-                project.DTE.StatusBar.Text = "Auto nesting disabled for " + project.Name;
+            if (_nesters == null)
+                _nesters = Microsoft.Web.Editor.ComponentLocatorWithOrdering<IFileNester>.ImportMany();
         }
     }
 }

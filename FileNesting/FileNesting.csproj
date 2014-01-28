@@ -44,7 +44,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.OLE.Interop" />
-    <Reference Include="Microsoft.VisualStudio.Shell.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0" />
@@ -148,6 +148,9 @@
     <Compile Include="Nesters\Automated\BundleNester.cs" />
     <Compile Include="Nesters\Automated\AddedExtensionNester.cs" />
     <Compile Include="Nesters\Automated\KnownFileTypeNester.cs" />
+    <Compile Include="Options\NestingOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PackageConstants.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="FileNestingPackage.cs" />
