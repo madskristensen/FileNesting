@@ -30,6 +30,7 @@
         <Parent guid="guidFileNestingCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
+          <CommandName>NestItem</CommandName>
           <ButtonText>Nest item...</ButtonText>
         </Strings>
       </Button>
@@ -38,6 +39,7 @@
         <Parent guid="guidFileNestingCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic2" />
         <Strings>
+          <CommandName>UnNestItem</CommandName>
           <ButtonText>Un-nest item</ButtonText>
         </Strings>
       </Button>
@@ -45,14 +47,15 @@
       <Button guid="guidFileNestingCmdSet" id="cmdRunNesting" priority="0x0100" type="Button">
         <Parent guid="guidFileNestingCmdSet" id="AutoNestGroup" />
         <Strings>
+          <CommandName>AutoNestSelectedItems</CommandName>
           <ButtonText>Auto-nest selected items</ButtonText>
         </Strings>
       </Button>
 
       <Button guid="guidFileNestingCmdSet" id="cmdAutoNesting" priority="0x0200" type="Button">
         <Parent guid="guidFileNestingCmdSet" id="AutoNestGroup" />
-        <CommandFlag>TextChanges</CommandFlag>
         <Strings>
+          <CommandName>EnableAutomaticNesting</CommandName>
           <ButtonText>Enable automatic nesting</ButtonText>
         </Strings>
       </Button>
