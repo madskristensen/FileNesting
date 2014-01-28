@@ -6,6 +6,7 @@ using System.Linq;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using System.IO;
+using Microsoft.VisualStudio;
 
 namespace MadsKristensen.FileNesting
 {
@@ -24,14 +25,13 @@ namespace MadsKristensen.FileNesting
         private static void BeforeNest(object sender, EventArgs e)
         {
             var button = (OleMenuCommand)sender;
-            _items = Helpers.GetSelectedItems().Where(itm => !Directory.Exists(itm.FileNames[0]));
+            _items = Helpers.GetSelectedItems().Where(i => i.Kind == VSConstants.ItemTypeGuid.PhysicalFile_string);
             button.Enabled = _items.Any();
         }
 
         private static void Nest(object sender, EventArgs e)
         {
-            var items = Helpers.GetSelectedItems();
-            ManualNester.Nest(items);
+            ManualNester.Nest(_items);
         }
     }
 }

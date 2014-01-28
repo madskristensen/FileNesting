@@ -14,6 +14,7 @@ namespace MadsKristensen.FileNesting
 
     static class PkgCmdIDList
     {
+        public const uint Nestingmenu = 0x1000;
         public const uint cmdUnNest = 0x1030;
         public const uint cmdNest = 0x1040;
         public const uint cmdAutoNesting = 0x01060;

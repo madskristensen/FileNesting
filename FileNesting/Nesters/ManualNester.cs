@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using EnvDTE;
 
 namespace MadsKristensen.FileNesting
@@ -10,9 +9,8 @@ namespace MadsKristensen.FileNesting
         public static void Nest(IEnumerable<ProjectItem> items)
         {
             Dialog.ItemSelector selector = new Dialog.ItemSelector(items);
-            selector.ShowDialog();
 
-            if (string.IsNullOrEmpty(selector.SelectedFile))
+            if (!selector.ShowDialog().Value)
                 return;
 
             foreach (ProjectItem item in items)
@@ -32,8 +30,12 @@ namespace MadsKristensen.FileNesting
                 UnNest(child);
             }
 
+            UnNestItem(item);
+        }
+
+        private static void UnNestItem(ProjectItem item)
+        {
             string path = item.Properties.Item("FullPath").Value.ToString();
-            string dir = Path.GetDirectoryName(path);
             object parent = item.Collection.Parent;
 
             while (parent != null)

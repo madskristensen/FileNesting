@@ -8,6 +8,7 @@
     <Menus>
       <Menu guid="guidFileNestingCmdSet" id="NestingMenu">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJWIN_SCOPE"/>
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>File Nesting</ButtonText>
         </Strings>
@@ -41,18 +42,18 @@
         </Strings>
       </Button>
 
-      <Button guid="guidFileNestingCmdSet" id="cmdAutoNesting" priority="0x0100" type="Button">
+      <Button guid="guidFileNestingCmdSet" id="cmdRunNesting" priority="0x0100" type="Button">
+        <Parent guid="guidFileNestingCmdSet" id="AutoNestGroup" />
+        <Strings>
+          <ButtonText>Auto-nest selected items</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidFileNestingCmdSet" id="cmdAutoNesting" priority="0x0200" type="Button">
         <Parent guid="guidFileNestingCmdSet" id="AutoNestGroup" />
         <CommandFlag>TextChanges</CommandFlag>
         <Strings>
           <ButtonText>Enable automatic nesting</ButtonText>
-        </Strings>
-      </Button>
-
-      <Button guid="guidFileNestingCmdSet" id="cmdRunNesting" priority="0x0200" type="Button">
-        <Parent guid="guidFileNestingCmdSet" id="AutoNestGroup" />
-        <Strings>
-          <ButtonText>Run automatic nesting on selected items</ButtonText>
         </Strings>
       </Button>
     </Buttons>

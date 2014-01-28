@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using EnvDTE;
+using Microsoft.VisualStudio;
 
 namespace MadsKristensen.FileNesting
 {
@@ -33,7 +34,7 @@ namespace MadsKristensen.FileNesting
         {
             foreach (ProjectItem item in GetSelectedItems())
             {
-                if (item.Kind == Microsoft.VisualStudio.VSConstants.ItemTypeGuid.PhysicalFolder_string)
+                if (item.Kind == VSConstants.ItemTypeGuid.PhysicalFolder_string)
                 {
                     var files = Directory.EnumerateFiles(item.FileNames[0], "*", SearchOption.AllDirectories);
                     foreach (string file in files)

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Design;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using EnvDTE;
@@ -39,11 +37,24 @@ namespace MadsKristensen.FileNesting
             OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (null != mcs)
             {
+                CommandID commandId = new CommandID(GuidList.guidFileNestingCmdSet, (int)PkgCmdIDList.Nestingmenu);
+                OleMenuCommand menuCommand = new OleMenuCommand((s, e) => { }, commandId);
+                menuCommand.BeforeQueryStatus += ShowMenu;
+                mcs.AddCommand(menuCommand);
+
                 UnNestButton.Register(_dte, mcs);
                 NestButton.Register(_dte, mcs);
                 EnableAutoNestButton.Register(_dte, mcs);
                 RunAutoNestingButton.Register(_dte, mcs);                
             }
+        }
+
+        private void ShowMenu(object sender, EventArgs e)
+        {
+            OleMenuCommand menu = (OleMenuCommand)sender;
+            ProjectItem item = Helpers.GetSelectedItems().FirstOrDefault();
+
+            menu.Visible = item != null && !(item.ContainingProject.Object is VsWebSite.VSWebSite);
         }
     }
 }

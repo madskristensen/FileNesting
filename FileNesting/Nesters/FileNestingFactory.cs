@@ -26,19 +26,19 @@ namespace MadsKristensen.FileNesting
             Enabled = true;
         }
 
-        private static void ItemRenamed(ProjectItem projectItem, string OldName)
+        private static void ItemRenamed(ProjectItem item, string OldName)
         {
-            if (projectItem.Properties != null)
+            if (item.Properties != null && !(item.Collection.Parent is ProjectItem))
             {
-                RunNesting(projectItem);
+                RunNesting(item);
             }
         }
 
-        private static void ItemAdded(ProjectItem projectItem)
+        private static void ItemAdded(ProjectItem item)
         {
-            if (projectItem.Properties != null)
+            if (item.Properties != null && !(item.Collection.Parent is ProjectItem))
             {
-                RunNesting(projectItem);
+                RunNesting(item);
             }
         }
 

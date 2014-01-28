@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows;
+using Microsoft.VisualStudio;
 
 namespace MadsKristensen.FileNesting.Dialog
 {
-    /// <summary>
-    /// Interaction logic for ItemSelector.xaml
-    /// </summary>
     public partial class ItemSelector : Window
     {
         public string SelectedFile { get; private set; }
@@ -16,50 +13,50 @@ namespace MadsKristensen.FileNesting.Dialog
         {
             InitializeComponent();
 
-            EnvDTE.ProjectItem folder = FindFolder(items.ElementAt(0));
+            var siblings = GetSiblings(items.ElementAt(0));
             
-            if (folder == null)
-                return;
-            
-            ddlFiles.ItemsSource = GetSource(folder, items, new List<string>(), string.Empty);
+            ddlFiles.ItemsSource = GetSource(siblings, items, new List<string>(), string.Empty);
             ddlFiles.SelectedIndex = 0;
         }
 
-        private IEnumerable<string> GetSource(EnvDTE.ProjectItem parent, IEnumerable<EnvDTE.ProjectItem> selected, List<string> paths, string indentation)
+        private IEnumerable<string> GetSource(IEnumerable<EnvDTE.ProjectItem> parents, IEnumerable<EnvDTE.ProjectItem> selected, List<string> paths, string indentation)
         {
-            foreach (EnvDTE.ProjectItem item in parent.ProjectItems)
+            foreach (EnvDTE.ProjectItem item in parents)
             {
-                GetSource(item, selected, paths, indentation + "    ");
-
                 if (!selected.Contains(item))
                     paths.Add(indentation + item.Name);
+
+                GetSource(item.ProjectItems.Cast<EnvDTE.ProjectItem>(), selected, paths, indentation + "    ");
             }
 
             return paths;
         }
 
-        private EnvDTE.ProjectItem FindFolder(EnvDTE.ProjectItem item)
+        private IEnumerable<EnvDTE.ProjectItem> GetSiblings(EnvDTE.ProjectItem item)
         {
-            while (item.Collection.Parent != null)
+            EnvDTE.ProjectItem folder = item.Collection.Parent as EnvDTE.ProjectItem;
+            List<EnvDTE.ProjectItem> items = new List<EnvDTE.ProjectItem>();
+
+            while (folder != null)
             {
-                var parent = item.Collection.Parent as EnvDTE.ProjectItem;
-                if (parent != null)
-                {
-                    if (Directory.Exists(parent.Properties.Item("FullPath").Value.ToString()))
-                        return parent;
-                }
+                if (folder.Kind != VSConstants.ItemTypeGuid.PhysicalFolder_string)
+                    folder = folder.Collection.Parent as EnvDTE.ProjectItem;
                 else
-                {
                     break;
-                }
             }
 
-            return null;
+            if (folder != null)
+                items.AddRange(folder.ProjectItems.Cast<EnvDTE.ProjectItem>());
+            else
+                items.AddRange(item.ContainingProject.ProjectItems.Cast<EnvDTE.ProjectItem>());
+
+            return items.Where(i => i.Kind == VSConstants.ItemTypeGuid.PhysicalFile_string);
         }
 
         private void ok_Click(object sender, RoutedEventArgs e)
         {
             SelectedFile = ddlFiles.SelectedItem.ToString();
+            DialogResult = true;
             this.Close();
         }
     }

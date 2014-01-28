@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 
 namespace MadsKristensen.FileNesting
@@ -25,7 +26,7 @@ namespace MadsKristensen.FileNesting
         {
             _nested = from p in Helpers.GetSelectedItems()
                       let parent = p.Collection.Parent as ProjectItem
-                      where parent != null && !Directory.Exists(parent.FileNames[0])
+                      where parent != null && parent.Kind != VSConstants.ItemTypeGuid.PhysicalFolder_string
                       select p;
 
             var button = (OleMenuCommand)sender;
