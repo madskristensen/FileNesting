@@ -15,6 +15,7 @@ namespace MadsKristensen.FileNesting
             {".js", new [] {".coffee", ".iced", ".ts", ".bundle"}},
             {".css", new [] {".less", ".scss", ".sass", ".bundle"}},
             {".html", new [] {".bundle"}},
+            {".map", new [] {".js", ".css"}},
         };
 
         public NestingResult Nest(string fileName)
