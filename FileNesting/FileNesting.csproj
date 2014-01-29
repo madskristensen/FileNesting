@@ -119,6 +119,7 @@
     <Compile Include="MenuItems\NestButton.cs" />
     <Compile Include="MenuItems\UnNestButton.cs" />
     <Compile Include="MenuItems\EnableAutoNestButton.cs" />
+    <Compile Include="Nesters\Automated\VsDocNester.cs" />
     <Compile Include="Nesters\Automated\SpriteNester.cs" />
     <Compile Include="Nesters\Automated\BundleNester.cs" />
     <Compile Include="Nesters\Automated\AddedExtensionNester.cs" />
