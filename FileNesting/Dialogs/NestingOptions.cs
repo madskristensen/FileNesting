@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using Microsoft.VisualStudio.Shell;
+﻿using Microsoft.VisualStudio.Shell;
+using System.ComponentModel;
 
 namespace MadsKristensen.FileNesting
 {
@@ -48,10 +48,10 @@ namespace MadsKristensen.FileNesting
         [DefaultValue(true)]
         public bool EnableVsDocRule { get; set; }
 
-        [LocDisplayName("Enable interface rule")]
-        [Description("Nest C# and VB interface implementations under their respective interfaces")]
+        [LocDisplayName("Enable interface implementation rule")]
+        [Description("Nest C# interface implementations under their respective interfaces (by filename only)")]
         [Category("Nesting rules")]
         [DefaultValue(true)]
-        public bool EnableInterfaceRule { get; set; }
+        public bool EnableInterfaceImplementationRule { get; set; }
     }
 }
