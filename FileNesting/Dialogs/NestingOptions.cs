@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using Microsoft.VisualStudio.Shell;
+﻿using Microsoft.VisualStudio.Shell;
+using System.ComponentModel;
 
 namespace MadsKristensen.FileNesting
 {
@@ -12,7 +12,7 @@ namespace MadsKristensen.FileNesting
         public bool EnableAutoNesting { get; set; }
 
         // Rules
-        [LocDisplayName("Enable extention rule")]
+        [LocDisplayName("Enable extension rule")]
         [Description("Files with an added extension nests under parent. Example: foo.js.map nests under foo.js")]
         [Category("Nesting rules")]
         [DefaultValue(true)]
@@ -37,7 +37,7 @@ namespace MadsKristensen.FileNesting
         public bool EnableSpriteRule { get; set; }
 
         [LocDisplayName("Enable known file type rule")]
-        [Description("Some known file types will be nestd. Example: foo.css will nested under foo.less")]
+        [Description("Some known file types will be nestd. Example: foo.css will nest under foo.less")]
         [Category("Nesting rules")]
         [DefaultValue(true)]
         public bool EnableKnownFileTypeRule { get; set; }
@@ -47,5 +47,11 @@ namespace MadsKristensen.FileNesting
         [Category("Nesting rules")]
         [DefaultValue(true)]
         public bool EnableVsDocRule { get; set; }
+
+        [LocDisplayName("Enable interface implementation rule")]
+        [Description("Nest C# interface implementations under their respective interfaces (by filename only)")]
+        [Category("Nesting rules")]
+        [DefaultValue(true)]
+        public bool EnableInterfaceImplementationRule { get; set; }
     }
 }
