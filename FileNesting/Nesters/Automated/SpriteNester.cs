@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.IO;
 using EnvDTE;
 using Microsoft.VisualStudio.Utilities;
 
 namespace MadsKristensen.FileNesting
 {
-    [Export(typeof(IFileNester))]
     [Name("Sprite Nester")]
     [Order(Before = "Added Extension Nester")]
     internal class SpriteNester : IFileNester
