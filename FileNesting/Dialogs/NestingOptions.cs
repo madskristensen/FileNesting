@@ -51,7 +51,7 @@ namespace MadsKristensen.FileNesting
         [LocDisplayName("Enable interface implementation rule")]
         [Description("Nest C# interface implementations under their respective interfaces (by filename only)")]
         [Category("Nesting rules")]
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool EnableInterfaceImplementationRule { get; set; }
     }
 }
