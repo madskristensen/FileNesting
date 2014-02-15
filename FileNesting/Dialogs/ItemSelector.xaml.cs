@@ -8,23 +8,24 @@ namespace MadsKristensen.FileNesting
     public partial class ItemSelector : Window
     {
         public string SelectedFile { get; private set; }
+        private IDictionary<string, string> _files;
 
         public ItemSelector(IEnumerable<EnvDTE.ProjectItem> items)
         {
             InitializeComponent();
 
             var siblings = GetSiblings(items.ElementAt(0));
-            
-            ddlFiles.ItemsSource = GetSource(siblings, items, new List<string>(), string.Empty);
+            _files = GetSource(siblings, items, new Dictionary<string, string>(), string.Empty);
+            ddlFiles.ItemsSource = _files.Keys;
             ddlFiles.SelectedIndex = 0;
         }
 
-        private IEnumerable<string> GetSource(IEnumerable<EnvDTE.ProjectItem> parents, IEnumerable<EnvDTE.ProjectItem> selected, List<string> paths, string indentation)
+        private IDictionary<string, string> GetSource(IEnumerable<EnvDTE.ProjectItem> parents, IEnumerable<EnvDTE.ProjectItem> selected, Dictionary<string, string> paths, string indentation)
         {
             foreach (EnvDTE.ProjectItem item in parents)
             {
                 if (!selected.Contains(item))
-                    paths.Add(indentation + item.Name);
+                    paths.Add(indentation + item.Name, item.FileNames[0]);
 
                 GetSource(item.ProjectItems.Cast<EnvDTE.ProjectItem>(), selected, paths, indentation + "    ");
             }
@@ -55,7 +56,7 @@ namespace MadsKristensen.FileNesting
 
         private void ok_Click(object sender, RoutedEventArgs e)
         {
-            SelectedFile = ddlFiles.SelectedItem.ToString();
+            SelectedFile = _files[ddlFiles.SelectedItem.ToString()];
             DialogResult = true;
             this.Close();
         }
