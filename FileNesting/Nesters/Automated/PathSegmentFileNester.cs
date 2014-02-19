@@ -1,10 +1,12 @@
-﻿using System.IO;
-using System.Linq;
-using EnvDTE;
+﻿using EnvDTE;
 using Microsoft.VisualStudio.Utilities;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Linq;
 
 namespace MadsKristensen.FileNesting
 {
+    [Export(typeof(IFileNester))]
     [Name("Path Segment Nester")]
     [Order(Before = "Added Extension Nester")]
     internal class PathSegmentNester : IFileNester

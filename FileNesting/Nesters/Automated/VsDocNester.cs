@@ -1,9 +1,11 @@
-﻿using System;
-using EnvDTE;
+﻿using EnvDTE;
 using Microsoft.VisualStudio.Utilities;
+using System;
+using System.ComponentModel.Composition;
 
 namespace MadsKristensen.FileNesting
 {
+    [Export(typeof(IFileNester))]
     [Name("VsDoc Nester")]
     [Order(After = "Known File Type Nester")]
     internal class VsDocNester : IFileNester
