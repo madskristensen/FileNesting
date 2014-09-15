@@ -40,7 +40,7 @@ namespace MadsKristensen.FileNesting
         private static bool IsSupported(string fileName)
         {
             string extension = Path.GetExtension(fileName).ToLowerInvariant();
-            string[] allowed = new[] { ".js", ".css", ".html", ".htm", ".less", ".scss", ".coffee", ".iced", ".config" };
+            string[] allowed = new[] { ".js", ".css", ".html", ".htm", ".less", ".scss", ".coffee", ".iced", ".config", ".cs", "vb" };
 
             return allowed.Contains(extension);
         }
