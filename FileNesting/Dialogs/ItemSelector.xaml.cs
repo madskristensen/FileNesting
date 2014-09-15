@@ -53,7 +53,7 @@ namespace MadsKristensen.FileNesting
 
             if (folder != null)
                 items.AddRange(folder.ProjectItems.Cast<EnvDTE.ProjectItem>());
-            else
+            else if (item.ContainingProject != null && item.ContainingProject.ProjectItems != null)
                 items.AddRange(item.ContainingProject.ProjectItems.Cast<EnvDTE.ProjectItem>());
 
             return items.Where(i => i.Kind == VSConstants.ItemTypeGuid.PhysicalFile_string);
