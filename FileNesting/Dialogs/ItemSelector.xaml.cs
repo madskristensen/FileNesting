@@ -25,7 +25,12 @@ namespace MadsKristensen.FileNesting
             foreach (EnvDTE.ProjectItem item in parents)
             {
                 if (!selected.Contains(item))
-                    paths.Add(indentation + item.Name, item.FileNames[0]);
+                {
+                    string path = indentation + item.Name;
+
+                    if (!paths.ContainsKey(path))
+                        paths.Add(path, item.FileNames[0]);
+                }
 
                 GetSource(item.ProjectItems.Cast<EnvDTE.ProjectItem>(), selected, paths, indentation + "    ");
             }
