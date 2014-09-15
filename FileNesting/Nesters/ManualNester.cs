@@ -76,6 +76,9 @@ namespace MadsKristensen.FileNesting
 
         private static void DeleteAndAdd(ProjectItem item, string path)
         {
+            if (!File.Exists(path))
+                return;
+
             string temp = Path.GetTempFileName();
             File.Copy(path, temp, true);
             item.Delete();
