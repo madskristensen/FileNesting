@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="File Nesting" Height="156" Width="407" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="NoResize">
     <Grid>
-        <GroupBox Header="Select file" HorizontalAlignment="Left" Margin="13,11,0,0" VerticalAlignment="Top" Height="65" Width="368"/>
+        <GroupBox Header="Select parent" HorizontalAlignment="Left" Margin="13,11,0,0" VerticalAlignment="Top" Height="65" Width="368"/>
         <ComboBox x:Name="ddlFiles" HorizontalAlignment="Left" Margin="36,36,0,0" VerticalAlignment="Top" Width="322"/>
         <Button x:Name="cancel" Content="Cancel" HorizontalAlignment="Left" Margin="306,87,0,0" VerticalAlignment="Top" Width="75" IsCancel="True"/>
         <Button x:Name="ok" Content="OK" HorizontalAlignment="Left" Margin="226,87,0,0" VerticalAlignment="Top" Width="75" IsDefault="True" Click="ok_Click"/>

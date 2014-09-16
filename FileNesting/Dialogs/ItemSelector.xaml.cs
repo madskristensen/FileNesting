@@ -14,6 +14,8 @@ namespace MadsKristensen.FileNesting
         {
             InitializeComponent();
 
+            ddlFiles.Focus();
+
             var siblings = GetSiblings(items.ElementAt(0));
             _files = GetSource(siblings, items, new Dictionary<string, string>(), string.Empty);
             ddlFiles.ItemsSource = _files.Keys;
