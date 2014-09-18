@@ -34,7 +34,7 @@ namespace MadsKristensen.FileNesting
             {
                 ProjectItem parent = item.Collection.Parent as ProjectItem;
 
-                if (parent == null || parent.Kind != VSConstants.ItemTypeGuid.PhysicalFile_string)
+                if (parent == null || parent.Kind.Equals(VSConstants.ItemTypeGuid.PhysicalFile_string, StringComparison.OrdinalIgnoreCase))
                     RunNesting(item);
             }
         }

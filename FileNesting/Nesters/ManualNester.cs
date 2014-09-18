@@ -15,7 +15,7 @@ namespace MadsKristensen.FileNesting
 
             foreach (ProjectItem item in items)
             {
-                string path = item.Properties.Item("FullPath").Value.ToString();
+                string path = item.FileNames[0];
                 ProjectItem parent = item.DTE.Solution.FindProjectItem(selector.SelectedFile);
 
                 if (parent != null)
@@ -35,7 +35,7 @@ namespace MadsKristensen.FileNesting
 
         private static void UnNestItem(ProjectItem item)
         {
-            string path = item.Properties.Item("FullPath").Value.ToString();
+            string path = item.FileNames[0];
             object parent = item.Collection.Parent;
 
             while (parent != null)
