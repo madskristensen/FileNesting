@@ -20,7 +20,7 @@ namespace MadsKristensen.FileNesting
 
             int index = name.LastIndexOf('.');
             if (index > -1)
-            {                
+            {
                 string directory = Path.GetDirectoryName(fileName);
                 string extension = Path.GetExtension(fileName);
                 string firstName = name.Substring(0, index);

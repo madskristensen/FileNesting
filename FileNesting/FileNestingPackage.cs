@@ -27,7 +27,7 @@ namespace MadsKristensen.FileNesting
             DTE = GetService(typeof(DTE)) as DTE2;
 
             FileNestingFactory.Enable(DTE);
-            
+
             OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (null != mcs)
             {
@@ -55,7 +55,7 @@ namespace MadsKristensen.FileNesting
             OleMenuCommand menu = (OleMenuCommand)sender;
             ProjectItem item = Helpers.GetSelectedItems().FirstOrDefault();
 
-            menu.Visible = item != null && !(item.ContainingProject.Object is VsWebSite.VSWebSite);
+            menu.Visible = item != null;
         }
     }
 }
