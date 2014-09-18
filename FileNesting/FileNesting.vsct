@@ -20,7 +20,6 @@
                 <Parent guid="guidFileNestingCmdSet" id="NestingMenu"/>
             </Group>
             <Group guid="guidFileNestingCmdSet" id="AutoNestGroup" priority="0x0800">
-                <!--<Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>-->
                 <Parent guid="guidFileNestingCmdSet" id="NestingMenu"/>
             </Group>
         </Groups>
