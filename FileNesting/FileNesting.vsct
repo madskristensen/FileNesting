@@ -66,7 +66,7 @@
     </Commands>
 
     <KeyBindings>
-        <KeyBinding guid="guidFileNestingCmdSet" id="cmdNest" mod1="Alt" mod2="Alt" key1="f" key2="n" editor="guidVSStd97"/>
+        <KeyBinding guid="guidFileNestingCmdSet" id="cmdNest" mod1="Control Alt" key1="n" editor="guidVSStd97"/>
     </KeyBindings>
 
     <Symbols>
