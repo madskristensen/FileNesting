@@ -11,13 +11,14 @@ using Microsoft.VisualStudio.Shell.Interop;
 namespace MadsKristensen.FileNesting
 {
     [PackageRegistration(UseManagedResourcesOnly = true)]
-    [InstalledProductRegistration("#110", "#112", "1.9", IconResourceID = 400)]
+    [InstalledProductRegistration("#110", "#112", Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidFileNestingPkgString)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     [ProvideOptionPage(typeof(NestingOptions), "File Nesting", "General", 101, 100, true, new[] { "File Nesting in Solution Explorer" })]
     public sealed class FileNestingPackage : Package
     {
+        public const string Version = "2.0";
         public static DTE2 DTE { get; private set; }
         public static NestingOptions Options { get; private set; }
 

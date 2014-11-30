@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
+using MadsKristensen.FileNesting;
 
 [assembly: AssemblyTitle("File Nesting")]
 [assembly: AssemblyDescription("Automatically nest files based on file name and enables developers to nest and unnest any file manually")]
@@ -15,8 +16,8 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: AssemblyVersion("1.9.0.0")]
-[assembly: AssemblyFileVersion("1.9.0.0")]
+[assembly: AssemblyVersion(FileNestingPackage.Version)]
+[assembly: AssemblyFileVersion(FileNestingPackage.Version)]
 
 
 
