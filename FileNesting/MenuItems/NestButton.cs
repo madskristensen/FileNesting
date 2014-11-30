@@ -25,7 +25,7 @@ namespace MadsKristensen.FileNesting
         private static void BeforeNest(object sender, EventArgs e)
         {
             var button = (OleMenuCommand)sender;
-            _items = Helpers.GetSelectedItems().Where(i => i.Kind == VSConstants.ItemTypeGuid.PhysicalFile_string);
+            _items = Helpers.GetSelectedItems().Where(i => i.Kind == VSConstants.ItemTypeGuid.PhysicalFile_string && i.ProjectItems != null);
             button.Enabled = _items.Any();
         }
 
