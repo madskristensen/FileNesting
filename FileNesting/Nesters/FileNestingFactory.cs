@@ -9,7 +9,18 @@ namespace MadsKristensen.FileNesting
 {
     static class FileNestingFactory
     {
-        private static IEnumerable<Lazy<IFileNester>> _nesters;
+        private static List<IFileNester> _nesters = new List<IFileNester>()
+        {
+            new KnownFileTypeNester(),
+            new VsDocNester(),
+            new BundleNester(),
+            new InterfaceImplementationNester(),
+            new PathSegmentNester(),
+            new SpriteNester(),
+            new AddedExtensionNester(),
+
+        };
+
         private static ProjectItemsEvents _events;
         public static bool Enabled { get; set; }
 
@@ -44,21 +55,13 @@ namespace MadsKristensen.FileNesting
             if (!Enabled)
                 return;
 
-            EnsureImports();
-
-            foreach (var nester in _nesters.Where(n => n.Value.IsEnabled()))
+            foreach (var nester in _nesters.Where(n => n.IsEnabled()))
             {
-                NestingResult result = nester.Value.Nest(item.FileNames[0]);
+                NestingResult result = nester.Nest(item.FileNames[0]);
 
                 if (result == NestingResult.StopProcessing)
                     break;
             }
-        }
-
-        private static void EnsureImports()
-        {
-            if (_nesters == null)
-                _nesters = Microsoft.Web.Editor.ComponentLocatorWithOrdering<IFileNester>.ImportMany();
         }
     }
 }

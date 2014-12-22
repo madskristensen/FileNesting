@@ -1,14 +1,9 @@
-﻿using EnvDTE;
-using Microsoft.VisualStudio.Utilities;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.Collections.Generic;
 using System.IO;
+using EnvDTE;
 
 namespace MadsKristensen.FileNesting
 {
-    [Export(typeof(IFileNester))]
-    [Name("Bundle Nester")]
-    [Order(Before = "Added Extension Nester")]
     internal class BundleNester : IFileNester
     {
         private static Dictionary<string, string[]> _mapping = new Dictionary<string, string[]>(){
@@ -38,7 +33,7 @@ namespace MadsKristensen.FileNesting
 
             return NestingResult.Continue;
         }
-        
+
         public bool IsEnabled()
         {
             return FileNestingPackage.Options.EnableBundleRule;

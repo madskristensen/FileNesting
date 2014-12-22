@@ -1,15 +1,10 @@
-﻿using EnvDTE;
-using Microsoft.VisualStudio.Utilities;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using EnvDTE;
 
-namespace MadsKristensen.FileNesting.Nesters
+namespace MadsKristensen.FileNesting
 {
-    [Export(typeof(IFileNester))]
-    [Name("Interface Implementation Nester")]
-    [Order(Before = "Added Extension Nester")]
     internal class InterfaceImplementationNester : IFileNester
     {
         public NestingResult Nest(string fileName)

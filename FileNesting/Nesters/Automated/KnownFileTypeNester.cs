@@ -1,14 +1,9 @@
-﻿using EnvDTE;
-using Microsoft.VisualStudio.Utilities;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.Collections.Generic;
 using System.IO;
+using EnvDTE;
 
 namespace MadsKristensen.FileNesting
 {
-    [Export(typeof(IFileNester))]
-    [Name("Known File Type Nester")]
-    [Order(Before = "Added Extension Nester")]
     internal class KnownFileTypeNester : IFileNester
     {
         private static Dictionary<string, string[]> _mapping = new Dictionary<string, string[]>(){
