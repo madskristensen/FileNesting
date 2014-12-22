@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="6c799bc4-0d4c-4172-98bc-5d464b612dca" Version="2.0" Language="en-US" Publisher="Mads Kristensen" />
+        <Identity Id="6c799bc4-0d4c-4172-98bc-5d464b612dca" Version="2.1" Language="en-US" Publisher="Mads Kristensen" />
         <DisplayName>File Nesting</DisplayName>
         <Description>Automatically nest files based on file name and enables developers to nest and unnest any file manually</Description>
         <Icon>Resources\logo.png</Icon>
