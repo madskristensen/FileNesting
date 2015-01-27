@@ -18,7 +18,7 @@ namespace MadsKristensen.FileNesting
     [ProvideOptionPage(typeof(NestingOptions), "File Nesting", "General", 101, 100, true, new[] { "File Nesting in Solution Explorer" })]
     public sealed class FileNestingPackage : Package
     {
-        public const string Version = "2.1";
+        public const string Version = "2.1.2";
         public static DTE2 DTE { get; private set; }
         public static NestingOptions Options { get; private set; }
 
