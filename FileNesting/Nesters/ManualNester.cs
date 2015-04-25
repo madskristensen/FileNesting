@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using EnvDTE;
-using System.Linq;
 
 namespace MadsKristensen.FileNesting
 {
@@ -22,19 +21,13 @@ namespace MadsKristensen.FileNesting
                 if (parent == null) continue;
 
                 bool mayNeedAttributeSet = item.ContainingProject.Kind == CordovaKind;
-
-                if (mayNeedAttributeSet) DeleteAndAdd(item, path);
-                ProjectItem newItem = parent.ProjectItems.AddFromFile(path);
                 if (mayNeedAttributeSet)
                 {
-                    //  It is possible this may not be required in future cordova project versions
-                    //   so do a test first
-                    var pitems = parent.ProjectItems
-                                       .Cast<ProjectItem>();
-                    if (!pitems.Any(x => x.Name == path))
-                    {
-                        newItem.Properties.Item("DependentUpon").Value = parent.Name;
-                    }
+                    SetDependentUpon(item, parent.Name);
+                }
+                else
+                {
+                    parent.ProjectItems.AddFromFile(path);
                 }
             }
         }
@@ -53,6 +46,13 @@ namespace MadsKristensen.FileNesting
         {
             string path = item.FileNames[0];
             object parent = item.Collection.Parent;
+
+            bool mayNeedAttributeSet = item.ContainingProject.Kind == CordovaKind;
+            if (mayNeedAttributeSet)
+            {
+                RemoveDependentUpon(item);
+                return;
+            }
 
             while (parent != null)
             {
@@ -100,6 +100,15 @@ namespace MadsKristensen.FileNesting
             item.Delete();
             File.Copy(temp, path);
             File.Delete(temp);
+        }
+
+        private static void RemoveDependentUpon(ProjectItem item)
+        {
+            SetDependentUpon(item, null);
+        }
+        private static void SetDependentUpon(ProjectItem item, string value)
+        {
+            item.Properties.Item("DependentUpon").Value = value;
         }
     }
 }
