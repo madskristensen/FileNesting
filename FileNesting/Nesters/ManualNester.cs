@@ -2,10 +2,6 @@
 using System.IO;
 using EnvDTE;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Data;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.Shell;
 
 namespace MadsKristensen.FileNesting
 {
@@ -37,30 +33,10 @@ namespace MadsKristensen.FileNesting
                                        .Cast<ProjectItem>();
                     if (!pitems.Any(x => x.Name == path))
                     {
-                        SetDependentUponAttribute(newItem, parent);
+                        newItem.Properties.Item("DependentUpon").Value = parent.Name;
                     }
                 }
             }
-        }
-
-        private static void SetDependentUponAttribute(ProjectItem item, ProjectItem parent)
-        {
-            //  See: https://msdn.microsoft.com/en-us/library/bb458043.aspx "How to: Add an Attribute to a Project Item"
-            Project project = item.ContainingProject;
-            
-            string uniqueName = project.UniqueName;
-            var solution = (IVsSolution)Package.GetGlobalService(typeof(IVsSolution));
-            IVsHierarchy hierarchy;
-            solution.GetProjectOfUniqueName(uniqueName, out hierarchy);
-            var buildPropertyStorage = hierarchy as IVsBuildPropertyStorage;
-            if (buildPropertyStorage != null)
-            {
-                uint itemId;
-                string fullPath = (string)item.Properties.Item("FullPath").Value;
-                hierarchy.ParseCanonicalName(fullPath, out itemId);
-                buildPropertyStorage.SetItemAttribute(itemId, "DependentUpon", parent.Name);
-            }
-            project.Save();
         }
 
         public static void UnNest(ProjectItem item)
