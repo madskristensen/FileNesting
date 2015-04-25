@@ -47,12 +47,7 @@ namespace MadsKristensen.FileNesting
             string path = item.FileNames[0];
             object parent = item.Collection.Parent;
 
-            bool mayNeedAttributeSet = item.ContainingProject.Kind == CordovaKind;
-            if (mayNeedAttributeSet)
-            {
-                RemoveDependentUpon(item);
-                return;
-            }
+            bool shouldAddToParentItem = item.ContainingProject.Kind == CordovaKind;
 
             while (parent != null)
             {
@@ -66,7 +61,15 @@ namespace MadsKristensen.FileNesting
 
                         DeleteAndAdd(item, path);
 
-                        ProjectItem newItem = pi.ContainingProject.ProjectItems.AddFromFile(path);
+                        ProjectItem newItem;
+                        if (shouldAddToParentItem)
+                        {
+                            newItem = pi.ProjectItems.AddFromFile(path);
+                        }
+                        else
+                        {
+                            newItem = pi.ContainingProject.ProjectItems.AddFromFile(path);
+                        }
                         newItem.Properties.Item("ItemType").Value = itemType;
                         break;
                     }
