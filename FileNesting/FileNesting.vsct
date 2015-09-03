@@ -6,7 +6,7 @@
 
     <Commands package="guidFileNestingPkg">
         <Menus>
-            <Menu guid="guidFileNestingCmdSet" id="NestingMenu">
+            <Menu guid="guidFileNestingCmdSet" id="NestingMenu" priority="10">
                 <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJWIN_SCOPE"/>
                 <CommandFlag>DynamicVisibility</CommandFlag>
                 <Strings>
