@@ -6,6 +6,7 @@ namespace MadsKristensen.FileNesting
 {
     static class ManualNester
     {
+        private const string CordovaKind = "{262852C6-CD72-467D-83FE-5EEB1973A190}";
         public static void Nest(IEnumerable<ProjectItem> items)
         {
             ItemSelector selector = new ItemSelector(items);
@@ -17,9 +18,17 @@ namespace MadsKristensen.FileNesting
             {
                 string path = item.FileNames[0];
                 ProjectItem parent = item.DTE.Solution.FindProjectItem(selector.SelectedFile);
+                if (parent == null) continue;
 
-                if (parent != null)
+                bool mayNeedAttributeSet = item.ContainingProject.Kind == CordovaKind;
+                if (mayNeedAttributeSet)
+                {
+                    SetDependentUpon(item, parent.Name);
+                }
+                else
+                {
                     parent.ProjectItems.AddFromFile(path);
+                }
             }
         }
 
@@ -38,6 +47,8 @@ namespace MadsKristensen.FileNesting
             string path = item.FileNames[0];
             object parent = item.Collection.Parent;
 
+            bool shouldAddToParentItem = item.ContainingProject.Kind == CordovaKind;
+
             while (parent != null)
             {
                 var pi = parent as ProjectItem;
@@ -50,7 +61,15 @@ namespace MadsKristensen.FileNesting
 
                         DeleteAndAdd(item, path);
 
-                        ProjectItem newItem = pi.ContainingProject.ProjectItems.AddFromFile(path);
+                        ProjectItem newItem;
+                        if (shouldAddToParentItem)
+                        {
+                            newItem = pi.ProjectItems.AddFromFile(path);
+                        }
+                        else
+                        {
+                            newItem = pi.ContainingProject.ProjectItems.AddFromFile(path);
+                        }
                         newItem.Properties.Item("ItemType").Value = itemType;
                         break;
                     }
@@ -84,6 +103,15 @@ namespace MadsKristensen.FileNesting
             item.Delete();
             File.Copy(temp, path);
             File.Delete(temp);
+        }
+
+        private static void RemoveDependentUpon(ProjectItem item)
+        {
+            SetDependentUpon(item, null);
+        }
+        private static void SetDependentUpon(ProjectItem item, string value)
+        {
+            item.Properties.Item("DependentUpon").Value = value;
         }
     }
 }
