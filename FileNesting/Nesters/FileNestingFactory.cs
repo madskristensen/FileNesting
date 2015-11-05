@@ -41,7 +41,7 @@ namespace MadsKristensen.FileNesting
 
         private static void ItemAdded(ProjectItem item)
         {
-            if (FileNestingPackage.Options.EnableAutoNesting && item != null && item.Properties != null)
+          if (FileNestingPackage.Options != null && FileNestingPackage.Options.EnableAutoNesting && item != null && item.Properties != null)
             {
                 ProjectItem parent = item.Collection.Parent as ProjectItem;
 

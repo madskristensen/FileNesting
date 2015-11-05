@@ -56,5 +56,21 @@ namespace MadsKristensen.FileNesting
                 }
             }
         }
+
+        public static bool ProjectItemContainsProperty(ProjectItem projectItem, string propertyName)
+        {
+          if (projectItem.Properties != null)
+          {
+            foreach (Property item in projectItem.Properties)
+            {
+              if (item != null && item.Name == propertyName)
+              {
+                return true;
+              }
+            }
+          }
+
+          return false;
+        }
     }
 }

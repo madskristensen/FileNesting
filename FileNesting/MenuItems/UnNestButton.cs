@@ -26,7 +26,7 @@ namespace MadsKristensen.FileNesting
         {
             _nested = from p in Helpers.GetSelectedItems()
                       let parent = p.Collection.Parent as ProjectItem
-                      where parent != null && parent.Kind != VSConstants.ItemTypeGuid.PhysicalFolder_string
+                      where parent != null && !parent.Kind.Equals(VSConstants.ItemTypeGuid.PhysicalFolder_string, StringComparison.OrdinalIgnoreCase)
                       select p;
 
             var button = (OleMenuCommand)sender;
