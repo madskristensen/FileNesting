@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using EnvDTE;
+using System.Collections.Generic;
 using System.IO;
-using EnvDTE;
 
 namespace MadsKristensen.FileNesting
 {
     internal class KnownFileTypeNester : IFileNester
     {
         private static Dictionary<string, string[]> _mapping = new Dictionary<string, string[]>(){
-            {".js", new [] {".coffee", ".litcoffee", ".iced", ".ts", ".dart", ".html", ".cshtml", ".vbhtml", ".aspx", ".master", ".ascx"}},
+            {".js", new [] {".coffee", ".litcoffee", ".iced", ".ts", ".tsx", ".dart", ".html", ".cshtml", ".vbhtml", ".aspx", ".master", ".ascx"}},
             {".css", new [] {".less", ".scss", ".sass", ".styl", ".html", ".cshtml", ".vbhtml", ".aspx", ".master", ".ascx"}},
             {".ts", new [] {".html", ".cshtml", ".vbhtml", ".aspx", ".master", ".ascx"}},
             {".map", new [] {".js", ".css"}},
