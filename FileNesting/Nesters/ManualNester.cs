@@ -12,7 +12,9 @@ namespace MadsKristensen.FileNesting
             ItemSelector selector = new ItemSelector(items);
 
             if (!selector.ShowDialog().Value)
-                return;
+            {
+              return;
+            }
 
             foreach (ProjectItem item in items)
             {
@@ -20,13 +22,14 @@ namespace MadsKristensen.FileNesting
                 ProjectItem parent = item.DTE.Solution.FindProjectItem(selector.SelectedFile);
                 if (parent == null) continue;
 
-                bool mayNeedAttributeSet = item.ContainingProject.Kind == CordovaKind;
+                bool mayNeedAttributeSet = item.ContainingProject.Kind.Equals(CordovaKind, System.StringComparison.OrdinalIgnoreCase);
                 if (mayNeedAttributeSet)
                 {
                     SetDependentUpon(item, parent.Name);
                 }
                 else
                 {
+                    item.Remove();
                     parent.ProjectItems.AddFromFile(path);
                 }
             }
@@ -109,9 +112,13 @@ namespace MadsKristensen.FileNesting
         {
             SetDependentUpon(item, null);
         }
+
         private static void SetDependentUpon(ProjectItem item, string value)
         {
+          if (Helpers.ProjectItemContainsProperty(item, "DependentUpon"))
+          {
             item.Properties.Item("DependentUpon").Value = value;
+          }
         }
     }
 }

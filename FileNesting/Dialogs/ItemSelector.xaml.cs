@@ -16,8 +16,8 @@ namespace MadsKristensen.FileNesting
 
             ddlFiles.Focus();
 
-            var siblings = GetSiblings(items.ElementAt(0));
-            _files = GetSource(siblings, items, new Dictionary<string, string>(), string.Empty);
+            var siblings = ItemSelector.GetSiblings(items.ElementAt(0));
+            _files = this.GetSource(siblings, items, new Dictionary<string, string>(), string.Empty);
             ddlFiles.ItemsSource = _files.Keys;
             ddlFiles.SelectedIndex = 0;
         }
@@ -47,18 +47,26 @@ namespace MadsKristensen.FileNesting
 
             while (folder != null)
             {
-                if (folder.Kind != VSConstants.ItemTypeGuid.PhysicalFolder_string)
-                    folder = folder.Collection.Parent as EnvDTE.ProjectItem;
-                else
-                    break;
+              if (!folder.Kind.Equals(VSConstants.ItemTypeGuid.PhysicalFolder_string, System.StringComparison.OrdinalIgnoreCase))
+              {
+                folder = folder.Collection.Parent as EnvDTE.ProjectItem;
+              }
+              else
+              {
+                break;
+              }
             }
 
             if (folder != null)
-                items.AddRange(folder.ProjectItems.Cast<EnvDTE.ProjectItem>());
+            {
+              items.AddRange(folder.ProjectItems.Cast<EnvDTE.ProjectItem>());
+            }
             else if (item.ContainingProject != null && item.ContainingProject.ProjectItems != null)
-                items.AddRange(item.ContainingProject.ProjectItems.Cast<EnvDTE.ProjectItem>());
+            {
+              items.AddRange(item.ContainingProject.ProjectItems.Cast<EnvDTE.ProjectItem>());
+            }
 
-            return items.Where(i => i.Kind == VSConstants.ItemTypeGuid.PhysicalFile_string);
+            return items.Where(i => i.Kind.Equals(VSConstants.ItemTypeGuid.PhysicalFile_string, System.StringComparison.OrdinalIgnoreCase));
         }
 
         private void ok_Click(object sender, RoutedEventArgs e)
