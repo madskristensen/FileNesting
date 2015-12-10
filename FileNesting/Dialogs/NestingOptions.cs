@@ -37,7 +37,7 @@ namespace MadsKristensen.FileNesting
         public bool EnableSpriteRule { get; set; }
 
         [LocDisplayName("Enable known file type rule")]
-        [Description("Some known file types will be nestd. Example: foo.css will nest under foo.less")]
+        [Description("Some known file types will be nested. Example: foo.css will nest under foo.less")]
         [Category("Nesting rules")]
         [DefaultValue(true)]
         public bool EnableKnownFileTypeRule { get; set; }
