@@ -41,12 +41,23 @@ namespace MadsKristensen.FileNesting
 
         private static void ItemAdded(ProjectItem item)
         {
-          if (FileNestingPackage.Options != null && FileNestingPackage.Options.EnableAutoNesting && item != null && item.Properties != null)
-            {
-                ProjectItem parent = item.Collection.Parent as ProjectItem;
+            // Node.js project system doesn't support 'item.Collection'
+            if (item.ContainingProject.Kind.Equals("{9092aa53-fb77-4645-b42d-1ccca6bd08bd}", StringComparison.OrdinalIgnoreCase))
+                return;
 
-                if (parent == null || parent.Kind.Equals(VSConstants.ItemTypeGuid.PhysicalFile_string, StringComparison.OrdinalIgnoreCase))
-                    RunNesting(item);
+            if (FileNestingPackage.Options != null && FileNestingPackage.Options.EnableAutoNesting && item != null && item.Properties != null)
+            {
+                try
+                {
+                    ProjectItem parent = item.Collection.Parent as ProjectItem;
+
+                    if (parent == null || parent.Kind.Equals(VSConstants.ItemTypeGuid.PhysicalFile_string, StringComparison.OrdinalIgnoreCase))
+                        RunNesting(item);
+                }
+                catch (Exception)
+                {
+                    // Implement logging
+                }
             }
         }
 
