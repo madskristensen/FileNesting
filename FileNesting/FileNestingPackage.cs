@@ -57,7 +57,9 @@ namespace MadsKristensen.FileNesting
             ProjectItem item = Helpers.GetSelectedItems().FirstOrDefault();
 
             // We need to exclude website projects, since they don't support file nesting
-            menu.Visible = item != null && !(item.ContainingProject.Object is VsWebSite.VSWebSite);
+            menu.Visible = item != null &&
+                           !(item.ContainingProject.Object is VsWebSite.VSWebSite) &&
+                           !item.ContainingProject.Kind.Equals("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}", StringComparison.OrdinalIgnoreCase); // ASP.NET 5
         }
     }
 }
