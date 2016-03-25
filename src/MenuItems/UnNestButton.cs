@@ -16,7 +16,7 @@ namespace MadsKristensen.FileNesting
 
         public static void Register(MenuCommandService mcs)
         {
-            CommandID unNestId = new CommandID(GuidList.guidFileNestingCmdSet, (int)PkgCmdIDList.cmdUnNest);
+            CommandID unNestId = new CommandID(PackageGuids.guidFileNestingCmdSet, PackageIds.cmdUnNest);
             OleMenuCommand menuUnNest = new OleMenuCommand(UnNest, unNestId);
             mcs.AddCommand(menuUnNest);
             menuUnNest.BeforeQueryStatus += BeforeUnNest;

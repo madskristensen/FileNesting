@@ -109,6 +109,11 @@
     <Compile Include="Dialogs\ItemSelector.xaml.cs">
       <DependentUpon>ItemSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileNesting.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FileNesting.vsct</DependentUpon>
+    </Compile>
     <Compile Include="Helpers.cs" />
     <Compile Include="MenuItems\RunAutoNestingButton.cs" />
     <Compile Include="MenuItems\NestButton.cs" />
@@ -123,7 +128,6 @@
     <Compile Include="Dialogs\NestingOptions.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PackageConstants.cs" />
     <Compile Include="FileNestingPackage.cs" />
     <Compile Include="Nesters\FileNestingFactory.cs" />
     <Compile Include="Nesters\IFileNester.cs" />
@@ -152,6 +156,8 @@
     <VSCTCompile Include="FileNesting.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
       <SubType>Designer</SubType>
+      <Generator>VsctGenerator</Generator>
+      <LastGenOutput>FileNesting.cs</LastGenOutput>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>

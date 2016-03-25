@@ -16,7 +16,7 @@ namespace MadsKristensen.FileNesting
 
         public static void Register(MenuCommandService mcs)
         {
-            CommandID nestId = new CommandID(GuidList.guidFileNestingCmdSet, (int)PkgCmdIDList.cmdNest);
+            CommandID nestId = new CommandID(PackageGuids.guidFileNestingCmdSet, PackageIds.cmdNest);
             OleMenuCommand menuNest = new OleMenuCommand(Nest, nestId);
             mcs.AddCommand(menuNest);
             menuNest.BeforeQueryStatus += BeforeNest;

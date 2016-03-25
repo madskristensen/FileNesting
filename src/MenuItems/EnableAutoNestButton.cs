@@ -8,11 +8,11 @@ namespace MadsKristensen.FileNesting
     static class EnableAutoNestButton
     {
         private static DTE2 _dte;
-        
+
         public static void Register(DTE2 dte, MenuCommandService mcs)
         {
             _dte = dte;
-            CommandID autoId = new CommandID(GuidList.guidFileNestingCmdSet, (int)PkgCmdIDList.cmdAutoNesting);
+            CommandID autoId = new CommandID(PackageGuids.guidFileNestingCmdSet, PackageIds.cmdAutoNesting);
             OleMenuCommand menuAuto = new OleMenuCommand(AutoNest, autoId);
             mcs.AddCommand(menuAuto);
             menuAuto.BeforeQueryStatus += BeforeAutoNest;

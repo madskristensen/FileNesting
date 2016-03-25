@@ -13,7 +13,7 @@ namespace MadsKristensen.FileNesting
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", Vsix.Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [Guid(GuidList.guidFileNestingPkgString)]
+    [Guid(PackageGuids.guidFileNestingPkgString)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     [ProvideOptionPage(typeof(NestingOptions), "File Nesting", "General", 101, 100, true, new[] { "File Nesting in Solution Explorer" })]
     public sealed class FileNestingPackage : Package
@@ -31,7 +31,7 @@ namespace MadsKristensen.FileNesting
             OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (null != mcs)
             {
-                CommandID commandId = new CommandID(GuidList.guidFileNestingCmdSet, (int)PkgCmdIDList.Nestingmenu);
+                CommandID commandId = new CommandID(PackageGuids.guidFileNestingCmdSet, PackageIds.NestingMenu);
                 OleMenuCommand menuCommand = new OleMenuCommand((s, e) => { }, commandId);
                 menuCommand.BeforeQueryStatus += ShowMenu;
                 mcs.AddCommand(menuCommand);
