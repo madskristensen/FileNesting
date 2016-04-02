@@ -20,9 +20,15 @@ namespace MadsKristensen.FileNesting
 
         [LocDisplayName("Enable path segment rule")]
         [Description("Files with an added path segment nests under parent. Example: foo.min.js nests under foo.js")]
-        [Category("Nesting rules")]
+        [Category("Path Segment")]
         [DefaultValue(true)]
         public bool EnablePathSegmentRule { get; set; }
+
+        [LocDisplayName("Path segment extensions")]
+        [Description("Additional Extensions (comma separated)")]
+        [Category("Path Segment")]
+        [DefaultValue("")]
+        public string PathSegmentAddedExtension { get; set; }
 
         [LocDisplayName("Enable .bundle file rule")]
         [Description("Files with .bundle extension will be parent. Example: foo.js.bundle will nest foo.js under it")]
