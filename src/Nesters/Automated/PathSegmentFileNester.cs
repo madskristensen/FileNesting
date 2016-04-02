@@ -32,17 +32,21 @@ namespace MadsKristensen.FileNesting
             return NestingResult.Continue;
         }
 
-        private static bool IsSupported(string fileName)
+        private bool IsSupported(string fileName)
         {
             string extension = Path.GetExtension(fileName).ToLowerInvariant();
-            string[] allowed = new[] { ".js", ".css", ".html", ".htm", ".less", ".scss", ".coffee", ".iced", ".config", ".cs", "vb" };
-
-            return allowed.Contains(extension);
+            string[] allowed = new[] { ".js", ".css", ".html", ".htm", ".less", ".scss", ".coffee", ".iced", ".config", ".cs", "vb"};
+            var added = AdditionalExtensions();
+            return allowed.Contains(extension) || added.Contains(extension);
         }
 
         public bool IsEnabled()
         {
             return FileNestingPackage.Options.EnablePathSegmentRule;
+        }
+        public string[] AdditionalExtensions()
+        {
+            return FileNestingPackage.Options.PathSegmentAddedExtension.Split(',');
         }
     }
 }
