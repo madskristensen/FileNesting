@@ -66,8 +66,8 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
-    <Reference Include="VsixLogger">
-      <HintPath>..\packages\VsixLogger.1.0.15\lib\net45\VsixLogger.dll</HintPath>
+    <Reference Include="VsixLogger, Version=1.0.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VsixLogger.1.0.18\lib\net45\VsixLogger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="VsWebSite.Interop, Version=8.0.0.0">
