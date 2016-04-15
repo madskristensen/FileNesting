@@ -16,12 +16,12 @@ on Channel 9.
 
 ## Features
 
-1. Manually nest files
-2. Manually un-nest files
-3. Auto-nesting based on naming conventions
-4. Option to enable auto-nesting when files are added or renamed
-5. Options to specify which naming conventions to apply
-6. Keyboard shortcut for manual nesting (Ctrl+Alt+N)
+- Manually nest files
+- Manually un-nest files
+- Auto-nesting based on naming conventions
+- Option to enable auto-nesting when files are added or renamed
+- Options to specify which naming conventions to apply
+- Keyboard shortcut for manual nesting (Ctrl+Alt+N)
 
 You can both nest and un-nest any file with ease.
 
