@@ -16,10 +16,34 @@ namespace MadsKristensen.FileNesting
 
             ddlFiles.Focus();
 
-            var siblings = ItemSelector.GetSiblings(items.ElementAt(0));
+            EnvDTE.ProjectItem currentItem = items.ElementAt(0);
+
+            var siblings = ItemSelector.GetSiblings(currentItem);
             _files = this.GetSource(siblings, items, new Dictionary<string, string>(), string.Empty);
             ddlFiles.ItemsSource = _files.Keys;
-            ddlFiles.SelectedIndex = 0;
+            var index = GetMatchParentIndex(currentItem.Name, _files.Keys.ToArray());
+            ddlFiles.SelectedIndex = index;
+        }
+
+        private int GetMatchParentIndex(string currentFileName, string[] allFiles)
+        {
+            int maxFileIndex = 0;
+            int maxFileEqualCharCount = 0;
+
+            for (int i = 0; i < allFiles.Length; i++)
+            {
+                var fileNameInList = allFiles[i];
+                var count = GetEqualCharCount(currentFileName , fileNameInList);
+                if (count <= maxFileEqualCharCount) continue;
+                maxFileEqualCharCount = count;
+                maxFileIndex = i;
+            }
+            return maxFileIndex;
+        }
+
+        private int GetEqualCharCount(string currentFileName, string fileNameInList)
+        {
+            return fileNameInList.TakeWhile((t, i) => i < currentFileName.Length).TakeWhile((t, i) => currentFileName[i] == t).Count();
         }
 
         private IDictionary<string, string> GetSource(IEnumerable<EnvDTE.ProjectItem> parents, IEnumerable<EnvDTE.ProjectItem> selected, Dictionary<string, string> paths, string indentation)
