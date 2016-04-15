@@ -43,6 +43,7 @@ namespace MadsKristensen.FileNesting
             }
 
             FileNestingFactory.Enabled = true;
+            Telemetry.TrackEvent("Unnest item");
         }
     }
 }

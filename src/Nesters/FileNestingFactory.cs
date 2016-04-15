@@ -45,7 +45,7 @@ namespace MadsKristensen.FileNesting
             if (item.ContainingProject.Kind.Equals("{9092aa53-fb77-4645-b42d-1ccca6bd08bd}", StringComparison.OrdinalIgnoreCase))
                 return;
 
-            if (FileNestingPackage.Options != null && FileNestingPackage.Options.EnableAutoNesting && item != null && item.Properties != null)
+            if (VSPackage.Options != null && VSPackage.Options.EnableAutoNesting && item != null && item.Properties != null)
             {
                 try
                 {
@@ -54,9 +54,9 @@ namespace MadsKristensen.FileNesting
                     if (parent == null || parent.Kind.Equals(VSConstants.ItemTypeGuid.PhysicalFile_string, StringComparison.OrdinalIgnoreCase))
                         RunNesting(item);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    // Implement logging
+                    Logger.Log(ex);
                 }
             }
         }

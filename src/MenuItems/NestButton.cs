@@ -32,6 +32,7 @@ namespace MadsKristensen.FileNesting
         private static void Nest(object sender, EventArgs e)
         {
             ManualNester.Nest(_items);
+            Telemetry.TrackEvent("Nest item");
         }
     }
 }

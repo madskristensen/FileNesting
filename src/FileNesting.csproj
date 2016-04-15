@@ -44,6 +44,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.1\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Shell.11.0" />
@@ -62,6 +66,10 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
+    <Reference Include="VsixLogger">
+      <HintPath>..\packages\VsixLogger.1.0.15\lib\net45\VsixLogger.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="VsWebSite.Interop, Version=8.0.0.0">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -109,10 +117,10 @@
     <Compile Include="Dialogs\ItemSelector.xaml.cs">
       <DependentUpon>ItemSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileNesting.cs">
+    <Compile Include="VSCommandTable.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FileNesting.vsct</DependentUpon>
+      <DependentUpon>VSCommandTable.vsct</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
     <Compile Include="MenuItems\RunAutoNestingButton.cs" />
@@ -128,7 +136,7 @@
     <Compile Include="Dialogs\NestingOptions.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FileNestingPackage.cs" />
+    <Compile Include="VSPackage.cs" />
     <Compile Include="Nesters\FileNestingFactory.cs" />
     <Compile Include="Nesters\IFileNester.cs" />
     <Compile Include="Nesters\ManualNester.cs" />
@@ -146,6 +154,7 @@
     <Resource Include="source.extension.ico">
       <DependentUpon>source.extension.vsixmanifest</DependentUpon>
     </Resource>
+    <None Include="packages.config" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
       <Generator>VsixManifestGenerator</Generator>
@@ -153,11 +162,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <VSCTCompile Include="FileNesting.vsct">
+    <VSCTCompile Include="VSCommandTable.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
       <SubType>Designer</SubType>
       <Generator>VsctGenerator</Generator>
-      <LastGenOutput>FileNesting.cs</LastGenOutput>
+      <LastGenOutput>VSCommandTable.cs</LastGenOutput>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>

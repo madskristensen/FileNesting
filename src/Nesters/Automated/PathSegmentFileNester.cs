@@ -21,7 +21,7 @@ namespace MadsKristensen.FileNesting
                 string firstName = name.Substring(0, index);
                 string parentFileName = Path.Combine(directory, firstName + extension);
 
-                ProjectItem parent = FileNestingPackage.DTE.Solution.FindProjectItem(parentFileName);
+                ProjectItem parent = VSPackage.DTE.Solution.FindProjectItem(parentFileName);
                 if (parent != null)
                 {
                     parent.ProjectItems.AddFromFile(fileName);
@@ -42,7 +42,7 @@ namespace MadsKristensen.FileNesting
 
         public bool IsEnabled()
         {
-            return FileNestingPackage.Options.EnablePathSegmentRule;
+            return VSPackage.Options.EnablePathSegmentRule;
         }
     }
 }
