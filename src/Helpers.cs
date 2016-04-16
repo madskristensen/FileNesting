@@ -6,7 +6,7 @@ using Microsoft.VisualStudio;
 
 namespace MadsKristensen.FileNesting
 {
-    class Helpers
+    static class Helpers
     {
         public static IEnumerable<ProjectItem> GetSelectedItems()
         {
@@ -57,7 +57,7 @@ namespace MadsKristensen.FileNesting
             }
         }
 
-        public static bool ProjectItemContainsProperty(ProjectItem projectItem, string propertyName)
+        public static bool ContainsProperty(this ProjectItem projectItem, string propertyName)
         {
           if (projectItem.Properties != null)
           {

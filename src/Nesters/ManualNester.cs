@@ -13,7 +13,7 @@ namespace MadsKristensen.FileNesting
 
             if (!selector.ShowDialog().Value)
             {
-              return;
+                return;
             }
 
             foreach (ProjectItem item in items)
@@ -115,10 +115,10 @@ namespace MadsKristensen.FileNesting
 
         private static void SetDependentUpon(ProjectItem item, string value)
         {
-          if (Helpers.ProjectItemContainsProperty(item, "DependentUpon"))
-          {
-            item.Properties.Item("DependentUpon").Value = value;
-          }
+            if (item.ContainsProperty("DependentUpon"))
+            {
+                item.Properties.Item("DependentUpon").Value = value;
+            }
         }
     }
 }
