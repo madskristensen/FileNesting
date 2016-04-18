@@ -36,6 +36,21 @@ Here's a screenshot of that:
 ![nested files](art/nested-files.png)
 ![nested files dark theme](art/nested-files-dark.png)
 
+## Known issues
+
+Due to missing or limited support for file nesting in certain
+project types, this extension will have no effect or be
+disabled. The project types are:
+
+- Node.js projects (NTVS)
+- ASP.NET Core (has built in rules for nesting)
+- Apache Cordova
+- Shared projects
+
+There is nothing this extension can do to provide nesting
+in those project types. The support has to be added to the
+project type itself before support can be added.
+
 ## Contribute
 Check out the [contribution guidelines](.github/CONTRIBUTING.md)
 if you want to contribute to this project.
