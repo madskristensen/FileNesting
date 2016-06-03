@@ -16,7 +16,7 @@ namespace MadsKristensen.FileNesting
     [Guid(PackageGuids.guidFileNestingPkgString)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     [ProvideOptionPage(typeof(NestingOptions), "File Nesting", "General", 101, 100, true, new[] { "File Nesting in Solution Explorer" })]
-    public sealed class VSPackage : Package
+    public sealed class FileNestingPackage : Package
     {
         public static DTE2 DTE { get; private set; }
         public static NestingOptions Options { get; private set; }

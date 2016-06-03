@@ -10,7 +10,7 @@ namespace MadsKristensen.FileNesting
     {
         public static IEnumerable<ProjectItem> GetSelectedItems()
         {
-            var items = (Array)VSPackage.DTE.ToolWindows.SolutionExplorer.SelectedItems;
+            var items = (Array)FileNestingPackage.DTE.ToolWindows.SolutionExplorer.SelectedItems;
             foreach (UIHierarchyItem selItem in items)
             {
                 var project = selItem.Object as Project;
@@ -44,7 +44,7 @@ namespace MadsKristensen.FileNesting
                     var files = Directory.EnumerateFiles(item.FileNames[0], "*", SearchOption.AllDirectories);
                     foreach (string file in files)
                     {
-                        ProjectItem child = VSPackage.DTE.Solution.FindProjectItem(file);
+                        ProjectItem child = FileNestingPackage.DTE.Solution.FindProjectItem(file);
 
                         if (child != null)
                             yield return child;

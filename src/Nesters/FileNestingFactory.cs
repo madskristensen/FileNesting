@@ -45,7 +45,7 @@ namespace MadsKristensen.FileNesting
             if (item.ContainingProject.Kind.Equals("{9092aa53-fb77-4645-b42d-1ccca6bd08bd}", StringComparison.OrdinalIgnoreCase))
                 return;
 
-            if (VSPackage.Options != null && VSPackage.Options.EnableAutoNesting && item != null && item.Properties != null)
+            if (FileNestingPackage.Options != null && FileNestingPackage.Options.EnableAutoNesting && item != null && item.Properties != null)
             {
                 try
                 {

@@ -21,16 +21,16 @@ namespace MadsKristensen.FileNesting
         private static void BeforeAutoNest(object sender, EventArgs e)
         {
             var button = (OleMenuCommand)sender;
-            button.Checked = VSPackage.Options.EnableAutoNesting;
+            button.Checked = FileNestingPackage.Options.EnableAutoNesting;
         }
 
         private static void AutoNest(object sender, EventArgs e)
         {
-            var isEnabled = VSPackage.Options.EnableAutoNesting;
+            var isEnabled = FileNestingPackage.Options.EnableAutoNesting;
 
             _dte.StatusBar.Text = "Automatic file nesting " + (isEnabled ? "disabled" : "enabled");
 
-            VSPackage.Options.EnableAutoNesting = !isEnabled;
+            FileNestingPackage.Options.EnableAutoNesting = !isEnabled;
 
             Telemetry.TrackEvent("Toggle auto-nest");
         }

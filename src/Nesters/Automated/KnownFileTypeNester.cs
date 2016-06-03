@@ -23,7 +23,7 @@ namespace MadsKristensen.FileNesting
             foreach (string ext in _mapping[extension])
             {
                 string parent = Path.ChangeExtension(fileName, ext);
-                ProjectItem item = VSPackage.DTE.Solution.FindProjectItem(parent);
+                ProjectItem item = FileNestingPackage.DTE.Solution.FindProjectItem(parent);
 
                 if (item != null)
                 {
@@ -37,7 +37,7 @@ namespace MadsKristensen.FileNesting
 
         public bool IsEnabled()
         {
-            return VSPackage.Options.EnableKnownFileTypeRule;
+            return FileNestingPackage.Options.EnableKnownFileTypeRule;
         }
     }
 }

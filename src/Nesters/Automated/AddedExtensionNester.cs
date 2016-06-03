@@ -8,7 +8,7 @@ namespace MadsKristensen.FileNesting
         public NestingResult Nest(string fileName)
         {
             string trimmed = Path.GetFileNameWithoutExtension(fileName);
-            ProjectItem item = VSPackage.DTE.Solution.FindProjectItem(trimmed);
+            ProjectItem item = FileNestingPackage.DTE.Solution.FindProjectItem(trimmed);
 
             if (item != null)
             {
@@ -22,7 +22,7 @@ namespace MadsKristensen.FileNesting
 
         public bool IsEnabled()
         {
-            return VSPackage.Options.EnableExtensionRule;
+            return FileNestingPackage.Options.EnableExtensionRule;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace MadsKristensen.FileNesting
                 string directory = Path.GetDirectoryName(fileName);
                 string parentFileName = Path.Combine(directory, interfaceName);
 
-                ProjectItem parent = VSPackage.DTE.Solution.FindProjectItem(parentFileName);
+                ProjectItem parent = FileNestingPackage.DTE.Solution.FindProjectItem(parentFileName);
                 if (parent != null)
                 {
                     parent.ProjectItems.AddFromFile(fileName);
@@ -77,7 +77,7 @@ namespace MadsKristensen.FileNesting
 
         public bool IsEnabled()
         {
-            return VSPackage.Options.EnableInterfaceImplementationRule;
+            return FileNestingPackage.Options.EnableInterfaceImplementationRule;
         }
     }
 }

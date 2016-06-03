@@ -11,7 +11,7 @@ namespace MadsKristensen.FileNesting
                 return NestingResult.Continue;
 
             string parent = fileName.Replace("-vsdoc.js", ".js");
-            ProjectItem item = VSPackage.DTE.Solution.FindProjectItem(parent);
+            ProjectItem item = FileNestingPackage.DTE.Solution.FindProjectItem(parent);
 
             if (item != null)
             {
@@ -25,7 +25,7 @@ namespace MadsKristensen.FileNesting
 
         public bool IsEnabled()
         {
-            return VSPackage.Options.EnableVsDocRule;
+            return FileNestingPackage.Options.EnableVsDocRule;
         }
     }
 }
