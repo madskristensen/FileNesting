@@ -30,7 +30,6 @@ namespace MadsKristensen.FileNesting
             }
 
             _dte.StatusBar.Clear();
-            Telemetry.TrackEvent("Run auto-nesting");
         }
     }
 }

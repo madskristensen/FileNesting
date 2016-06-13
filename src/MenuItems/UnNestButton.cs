@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
-using System.IO;
 using System.Linq;
 using EnvDTE;
-using EnvDTE80;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 
@@ -43,7 +41,6 @@ namespace MadsKristensen.FileNesting
             }
 
             FileNestingFactory.Enabled = true;
-            Telemetry.TrackEvent("Unnest item");
         }
     }
 }

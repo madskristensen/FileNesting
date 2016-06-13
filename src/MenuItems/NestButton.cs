@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
-using EnvDTE;
 using System.Linq;
-using EnvDTE80;
-using Microsoft.VisualStudio.Shell;
-using System.IO;
+using EnvDTE;
 using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.Shell;
 
 namespace MadsKristensen.FileNesting
 {
@@ -32,7 +30,6 @@ namespace MadsKristensen.FileNesting
         private static void Nest(object sender, EventArgs e)
         {
             ManualNester.Nest(_items);
-            Telemetry.TrackEvent("Nest item");
         }
     }
 }

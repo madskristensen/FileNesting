@@ -31,8 +31,6 @@ namespace MadsKristensen.FileNesting
             _dte.StatusBar.Text = "Automatic file nesting " + (isEnabled ? "disabled" : "enabled");
 
             FileNestingPackage.Options.EnableAutoNesting = !isEnabled;
-
-            Telemetry.TrackEvent("Toggle auto-nest");
         }
     }
 }

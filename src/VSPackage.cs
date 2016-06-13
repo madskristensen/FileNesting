@@ -15,7 +15,7 @@ namespace MadsKristensen.FileNesting
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageGuids.guidFileNestingPkgString)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
-    [ProvideOptionPage(typeof(NestingOptions), "File Nesting", "General", 101, 100, true, new[] { "File Nesting in Solution Explorer" })]
+    [ProvideOptionPage(typeof(NestingOptions), Vsix.Name, "General", 101, 100, true, new[] { "File Nesting in Solution Explorer" })]
     public sealed class FileNestingPackage : Package
     {
         public static DTE2 DTE { get; private set; }
@@ -26,7 +26,7 @@ namespace MadsKristensen.FileNesting
             base.Initialize();
             DTE = GetService(typeof(DTE)) as DTE2;
 
-            Logger.Initialize(this, Vsix.Name, Vsix.Version, "2e1b5120-2d5c-4324-82a3-ac73aafad731");
+            Logger.Initialize(this, Vsix.Name);
             FileNestingFactory.Enable(DTE);
 
             OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
