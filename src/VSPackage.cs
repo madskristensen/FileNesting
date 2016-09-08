@@ -14,7 +14,8 @@ namespace MadsKristensen.FileNesting
     [InstalledProductRegistration("#110", "#112", Vsix.Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageGuids.guidFileNestingPkgString)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionHasSingleProject)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionHasMultipleProjects)]
     [ProvideOptionPage(typeof(NestingOptions), Vsix.Name, "General", 101, 100, true, new[] { "File Nesting in Solution Explorer" })]
     public sealed class FileNestingPackage : Package
     {
@@ -23,7 +24,6 @@ namespace MadsKristensen.FileNesting
 
         protected override void Initialize()
         {
-            base.Initialize();
             DTE = GetService(typeof(DTE)) as DTE2;
 
             Logger.Initialize(this, Vsix.Name);
