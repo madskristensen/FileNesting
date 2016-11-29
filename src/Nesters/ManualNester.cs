@@ -22,7 +22,7 @@ namespace MadsKristensen.FileNesting
                 ProjectItem parent = item.DTE.Solution.FindProjectItem(selector.SelectedFile);
                 if (parent == null) continue;
 
-                bool mayNeedAttributeSet = item.ContainingProject.Kind.Equals(CordovaKind, System.StringComparison.OrdinalIgnoreCase);
+                bool mayNeedAttributeSet = item.ContainingProject.IsKind(ProjectTypes.DOTNET_Core, ProjectTypes.UNIVERSAL_APP);
                 if (mayNeedAttributeSet)
                 {
                     SetDependentUpon(item, parent.Name);

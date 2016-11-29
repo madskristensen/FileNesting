@@ -43,7 +43,7 @@ project types, this extension will have no effect or be
 disabled. The project types are:
 
 - Node.js projects (NTVS)
-- ASP.NET Core (has built in rules for nesting)
+- ASP.NET Core
 - Apache Cordova
 - Shared projects
 
