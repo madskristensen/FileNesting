@@ -18,6 +18,7 @@ namespace MadsKristensen.FileNesting
             new PathSegmentNester(),
             new SpriteNester(),
             new AddedExtensionNester(),
+            new ResxFileNester(),
 
         };
 
