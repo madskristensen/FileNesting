@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using EnvDTE;
 
-namespace MadsKristensen.FileNesting.Nesters
+namespace MadsKristensen.FileNesting
 {
     internal class ResxFileNester : IFileNester
     {
