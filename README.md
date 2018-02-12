@@ -14,6 +14,8 @@ See the
 [demo video](http://channel9.msdn.com/Blogs/MadsKristensen/Introducing-File-Nestor-for-Visual-Studio)
 on Channel 9.
 
+**Announcement:** Visual Studio 2017 15.6 introduced support for [customizing how files are nested in ASP.NET Core projects](https://blogs.msdn.microsoft.com/webdev/2018/02/07/file-nesting-in-solution-explorer/)
+
 ## Features
 
 - Manually nest files
