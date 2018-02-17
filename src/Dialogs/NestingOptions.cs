@@ -53,5 +53,11 @@ namespace MadsKristensen.FileNesting
         [Category("Nesting rules")]
         [DefaultValue(false)]
         public bool EnableInterfaceImplementationRule { get; set; }
+
+        [LocDisplayName("Enable .resx resource file rule")]
+        [Description("Nest language specific resource files under the neutral resource file")]
+        [Category("Nesting rules")]
+        [DefaultValue(false)]
+        public bool EnableResxResourceFileRule { get; set; }
     }
 }

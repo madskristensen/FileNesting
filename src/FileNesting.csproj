@@ -166,6 +166,7 @@
     <Compile Include="Nesters\IFileNester.cs" />
     <Compile Include="Nesters\ManualNester.cs" />
     <Compile Include="Nesters\Automated\PathSegmentFileNester.cs" />
+    <Compile Include="Nesters\Automated\ResxFileNester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="source.extension.cs">
       <DependentUpon>source.extension.vsixmanifest</DependentUpon>
