@@ -49,10 +49,11 @@ namespace MadsKristensen.FileNesting
             {
                 try
                 {
-                    ProjectItem parent = item.Collection.Parent as ProjectItem;
 
-                    if (parent == null || !parent.Kind.Equals(VSConstants.ItemTypeGuid.PhysicalFile_string, StringComparison.OrdinalIgnoreCase))
+                    if (!(item.Collection.Parent is ProjectItem parent) || !parent.Kind.Equals(VSConstants.ItemTypeGuid.PhysicalFile_string, StringComparison.OrdinalIgnoreCase))
+                    {
                         RunNesting(item);
+                    }
                 }
                 catch (Exception ex)
                 {
