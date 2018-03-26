@@ -93,6 +93,7 @@ namespace MadsKristensen.FileNesting
         public const string UNIVERSAL_APP = "{262852C6-CD72-467D-83FE-5EEB1973A190}";
         public const string NODE_JS = "{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}";
         public const string SSDT = "{00d1a9c2-b5f0-4af3-8072-f6c62b433612}";
+        public const string SHARED_PROJECT = "{D954291E-2A0B-460D-934E-DC6B0785DB48}";
     }
 
 }
