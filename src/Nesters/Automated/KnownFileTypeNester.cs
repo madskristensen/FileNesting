@@ -7,7 +7,7 @@ namespace MadsKristensen.FileNesting
     internal class KnownFileTypeNester : IFileNester
     {
         private static Dictionary<string, string[]> _mapping = new Dictionary<string, string[]>(){
-            {".js", new [] {".coffee", ".litcoffee", ".iced", ".ts", ".tsx", ".dart", ".html", ".cshtml", ".vbhtml", ".aspx", ".master", ".ascx"}},
+            {".js", new [] {".coffee", ".litcoffee", ".iced", ".ts", ".tsx", ".dart", ".html", ".cshtml", ".vbhtml", ".aspx", ".master", ".ascx", ".vue"}},
             {".css", new [] {".less", ".scss", ".sass", ".styl", ".html", ".cshtml", ".vbhtml", ".aspx", ".master", ".ascx"}},
             {".ts", new [] {".html", ".cshtml", ".vbhtml", ".aspx", ".master", ".ascx"}},
             {".map", new [] {".js", ".css"}},
