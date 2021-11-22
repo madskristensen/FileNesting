@@ -66,3 +66,10 @@
 "RelationType"=dword:00000001
 
 [$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sjs\.js]
+
+// Typescript
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.ts]
+"RelationType"=dword:00000001
+
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.ts\.js]
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.ts\.js\.map]
