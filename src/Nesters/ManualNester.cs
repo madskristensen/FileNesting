@@ -22,7 +22,11 @@ namespace MadsKristensen.FileNesting
                 ProjectItem parent = item.DTE.Solution.FindProjectItem(selector.SelectedFile);
                 if (parent == null) continue;
 
-                bool mayNeedAttributeSet = item.ContainingProject.IsKind(ProjectTypes.DOTNET_Core, ProjectTypes.UNIVERSAL_APP, ProjectTypes.SHARED_PROJECT);
+                bool mayNeedAttributeSet = item.ContainingProject.IsKind(
+                    ProjectTypes.DOTNET_Core,
+                    ProjectTypes.UNIVERSAL_APP,
+                    ProjectTypes.SHARED_PROJECT,
+                    ProjectTypes.NETSTANDARD);
 
                 if (mayNeedAttributeSet)
                 {
