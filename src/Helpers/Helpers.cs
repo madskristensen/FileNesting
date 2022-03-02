@@ -59,18 +59,18 @@ namespace MadsKristensen.FileNesting
 
         public static bool ContainsProperty(this ProjectItem projectItem, string propertyName)
         {
-          if (projectItem.Properties != null)
-          {
-            foreach (Property item in projectItem.Properties)
+            if (projectItem.Properties != null)
             {
-              if (item != null && item.Name == propertyName)
-              {
-                return true;
-              }
+                foreach (Property item in projectItem.Properties)
+                {
+                    if (item != null && item.Name == propertyName)
+                    {
+                        return true;
+                    }
+                }
             }
-          }
 
-          return false;
+            return false;
         }
 
         public static bool IsKind(this Project project, params string[] kindGuids)
@@ -94,6 +94,6 @@ namespace MadsKristensen.FileNesting
         public const string NODE_JS = "{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}";
         public const string SSDT = "{00d1a9c2-b5f0-4af3-8072-f6c62b433612}";
         public const string SHARED_PROJECT = "{D954291E-2A0B-460D-934E-DC6B0785DB48}";
+        public const string NETSTANDARD = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}";
     }
-
 }

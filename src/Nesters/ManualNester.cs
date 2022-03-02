@@ -22,13 +22,13 @@ namespace MadsKristensen.FileNesting
                 ProjectItem parent = item.DTE.Solution.FindProjectItem(selector.SelectedFile);
                 if (parent == null) continue;
 
-                bool mayNeedAttributeSet = item.ContainingProject.IsKind(ProjectTypes.DOTNET_Core, ProjectTypes.UNIVERSAL_APP, ProjectTypes.SHARED_PROJECT);
+                bool mayNeedAttributeSet = item.ContainingProject.IsKind(
+                    ProjectTypes.DOTNET_Core,
+                    ProjectTypes.UNIVERSAL_APP,
+                    ProjectTypes.SHARED_PROJECT,
+                    ProjectTypes.NETSTANDARD);
 
-                if (mayNeedAttributeSet)
-                {
-                    SetDependentUpon(item, parent.Name);
-                }
-                else
+                if (!(mayNeedAttributeSet && SetDependentUpon(item, parent.Name)))
                 {
                     item.Remove();
                     parent.ProjectItems.AddFromFile(path);
@@ -114,12 +114,15 @@ namespace MadsKristensen.FileNesting
             SetDependentUpon(item, null);
         }
 
-        private static void SetDependentUpon(ProjectItem item, string value)
+        private static bool SetDependentUpon(ProjectItem item, string value)
         {
             if (item.ContainsProperty("DependentUpon"))
             {
                 item.Properties.Item("DependentUpon").Value = value;
+                return true;
             }
+
+            return false;
         }
     }
 }
