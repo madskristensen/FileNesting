@@ -1,4 +1,4 @@
-* 2023-08-09 - Forked by tekmunkey to update project for compatibility with VS2022. *
+*2023-08-09 - Forked by tekmunkey to update project for compatibility with VS2022.  No plans to continue or support development beyond getting this to work.*
 
 # File Nesting
 
