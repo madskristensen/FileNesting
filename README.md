@@ -1,3 +1,5 @@
+* 2023-08-09 - Forked by tekmunkey to update project for compatibility with VS2022. *
+
 # File Nesting
 
 [![Build status](https://ci.appveyor.com/api/projects/status/kk45dmfauis2llkm?svg=true)](https://ci.appveyor.com/project/madskristensen/filenesting)
